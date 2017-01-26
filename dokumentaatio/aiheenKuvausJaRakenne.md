@@ -9,6 +9,6 @@
   * Mahdollisesti vaikeusasteen valitseminen/highscorejen katselu
 
 
-![Alt text](/home/ljone/Pictures/luokkakaavio.png "Luokkakaavio")
+![Luokkakaavio](home/ljone/Pictures/luokkakaavio.png
 
 
