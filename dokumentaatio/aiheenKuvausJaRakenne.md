@@ -9,6 +9,6 @@
   * Mahdollisesti vaikeusasteen valitseminen/highscorejen katselu
 
 
-[id]: home/ljone/mcman/dokumentaatio/luokkakaavio.png
+[id]: https://github.com/jiial/mcman/blob/master/dokumentaatio/luokkakaavio.png
 ![Luokkakaavio][id]
 
