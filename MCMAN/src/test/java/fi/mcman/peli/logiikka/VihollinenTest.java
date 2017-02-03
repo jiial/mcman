@@ -35,7 +35,7 @@ public class VihollinenTest {
         this.arpoja = new Random();
         this.peli = new Peli();
         this.kohde = peli.getPelaaja();
-        this.vihu = new Vihollinen("jorma", peli.getPelaaja().getX() - 1, peli.getPelaaja().getY() - 2);
+        this.vihu = new Vihollinen("jorma", peli.getPelaaja().getX() - 1, peli.getPelaaja().getY() - 2, this.peli);
         vihu.setKohde(kohde);
         vihu.setArpoja(arpoja);
         vihu.setSuurinX(peli.getAlusta().getLeveys() - 1);
@@ -50,7 +50,7 @@ public class VihollinenTest {
         vihu.liiku();
         vihu.liiku();
         vihu.liiku();
-        assertTrue(kohde.osuuko(vihu));
+        assertTrue(kohde.osuukoViholliseen(vihu));
     }
 
     @Test
@@ -64,7 +64,7 @@ public class VihollinenTest {
         vihu.liiku();
         vihu.liiku();
         vihu.liiku();
-        assertTrue(kohde.osuuko(vihu));
+        assertTrue(kohde.osuukoViholliseen(vihu));
     }
 
     @Test

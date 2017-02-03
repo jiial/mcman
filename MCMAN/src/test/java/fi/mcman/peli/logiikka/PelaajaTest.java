@@ -108,6 +108,16 @@ public class PelaajaTest {
         pelaaja.liiku();
         assertEquals(peli.getAlusta().getKorkeus()-1, pelaaja.getY());
     }
+    
+    @Test
+    public void kuoleeJosOsuuViholliseen() {
+        pelaaja.siirra(399, 399);
+        peli.lisaaVihollinen("Jorma", 398, 398, peli);
+        peli.getViholliset().get(0).liiku();
+        peli.getViholliset().get(0).liiku();
+        pelaaja.osuukoViholliseen(peli.getViholliset().get(0));
+        assertFalse(pelaaja.onElossa());
+    }
 
     @After
     public void tearDown() {

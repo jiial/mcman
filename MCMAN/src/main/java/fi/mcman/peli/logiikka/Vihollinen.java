@@ -1,23 +1,29 @@
 package fi.mcman.peli.logiikka;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.Random;
 
-public class Vihollinen implements Liikkuva, Paivitettava {
-
-    private String nimi;
-    private int x, y;
+public class Vihollinen extends Hahmo implements Paivitettava {
+  
     private int pieninX, suurinX, pieninY, suurinY;
     private Pelaaja kohde;
-    private Suunta suunta;
     private Random arpoja;
 
-    public Vihollinen(String nimi, int x, int y) {
-        this.nimi = nimi;
-        this.x = x;
-        this.y = y;
-
+    public Vihollinen(String nimi, int x, int y, Peli peli) {
+        super.nimi = nimi;
+        super.x = x;
+        super.y = y;
+        super.peli = peli;
+        this.kohde = super.peli.getPelaaja();
+        this.arpoja = new Random();
+        this.pieninX = 200;
+        this.pieninY = 200;
+        this.suurinX = 400;
+        this.suurinY = 400;
     }
     
+    @Override
     public void siirra(int x, int y) {
         this.x = x;
         this.y = y;
@@ -51,12 +57,10 @@ public class Vihollinen implements Liikkuva, Paivitettava {
         return nimi;
     }
 
-    @Override
     public int getY() {
         return y;
     }
 
-    @Override
     public int getX() {
         return x;
     }
@@ -64,28 +68,29 @@ public class Vihollinen implements Liikkuva, Paivitettava {
     @Override
     public void liiku() {
         valitseSuunta();
-        if (this.suunta == Suunta.VASEN) {
+        if (super.suunta == Suunta.VASEN) {
             if (this.x > this.pieninX) {
                 this.x--;
             }
         }
-        if (this.suunta == Suunta.OIKEA) {
+        if (super.suunta == Suunta.OIKEA) {
             if (this.x < this.suurinX) {
                 this.x++;
             }
         }
-        if (this.suunta == Suunta.ALAS) {
+        if (super.suunta == Suunta.ALAS) {
             if (this.y < this.suurinY) {
                 this.y++;
             }
         }
-        if (this.suunta == Suunta.YLOS) {
+        if (super.suunta == Suunta.YLOS) {
             if (this.y > this.pieninY) {
                 this.y--;
             }
         }
     }
 
+    
     public void valitseSuunta() {
 
         if (kohde.getX() == this.x) {
@@ -131,9 +136,16 @@ public class Vihollinen implements Liikkuva, Paivitettava {
         }
     }
 
+    
+    public void piirra(Graphics g) {
+        g.setColor(Color.red);
+//        g.drawRect(x, y, 30, 30);
+        g.fill3DRect(x, y, 30, 30, true);
+    }
+
     @Override
     public void paivita() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

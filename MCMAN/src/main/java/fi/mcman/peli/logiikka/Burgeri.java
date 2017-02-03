@@ -1,7 +1,10 @@
 
 package fi.mcman.peli.logiikka;
 
-public class Burgeri implements Paivitettava {
+import java.awt.Color;
+import java.awt.Graphics;
+
+public class Burgeri {
     private int x;
     private int y;
     private boolean syoty;
@@ -12,12 +15,12 @@ public class Burgeri implements Paivitettava {
         this.syoty = false;
     }
 
-    @Override
+    
     public int getX() {
         return x;
     }
 
-    @Override
+    
     public int getY() {
         return y;
     }
@@ -29,12 +32,12 @@ public class Burgeri implements Paivitettava {
     public void setSyoty(boolean syoty) {
         this.syoty = syoty;
     }
-
-    @Override
-    public void paivita() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
     
+    public void piirra(Graphics g) {
+        g.setColor(Color.orange);
+        g.drawOval(x, y, 10, 10);
+    }
+
     
     
     

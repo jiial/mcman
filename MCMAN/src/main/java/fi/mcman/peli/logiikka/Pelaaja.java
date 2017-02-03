@@ -1,23 +1,23 @@
 
 package fi.mcman.peli.logiikka;
 
+import java.awt.Color;
+import java.awt.Graphics;
 
-public class Pelaaja implements Liikkuva, Paivitettava {
-    private String nimi;
-    private int x;
-    private int y;
-    private boolean elossa;
-    private Suunta suunta;
-    private Peli peli;
+
+public class Pelaaja extends Hahmo implements Paivitettava {
     
+    private boolean elossa;
+   
     public Pelaaja(Peli peli) {
-        this.nimi = "McMan";
+        super.nimi = "McMan";
+        super.x = 599;
+        super.y = 599;
+        super.peli = peli;
         this.elossa = true;
-        this.x = 599;
-        this.y = 599;
-        this.peli = peli;
     }
     
+    @Override
     public void siirra(int x, int y) {
         this.x = x;
         this.y = y;
@@ -46,6 +46,7 @@ public class Pelaaja implements Liikkuva, Paivitettava {
         return elossa;
     }
 
+    
     public void setSuunta(Suunta suunta) {
         this.suunta = suunta;
     }
@@ -55,10 +56,18 @@ public class Pelaaja implements Liikkuva, Paivitettava {
         this.elossa = false;
     }
     
-    public boolean osuuko(Paivitettava p) {
-        if (this.x == p.getY() && this.y == p.getY()) {
+    public boolean osuukoBurgeriin(Burgeri b) {
+        if (this.x == b.getX() && this.y == b.getY()) {
             return true;
-        }
+        } 
+        return false;
+    }
+    
+    public boolean osuukoViholliseen(Vihollinen v) {
+        if (this.x == v.getX() && this.y == v.getY()) {
+            kuolee();
+            return true;
+        } 
         return false;
     }
 
@@ -84,6 +93,11 @@ public class Pelaaja implements Liikkuva, Paivitettava {
                 this.y--;
             }
         }
+    }
+    
+    public void piirra(Graphics g) {
+        g.setColor(Color.YELLOW);
+        g.drawOval(x, y, 20, 20);
     }
 
     @Override
