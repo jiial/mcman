@@ -8,20 +8,25 @@
 <div id="overview"><a href="../../../../apidocs/fi/mcman/peli/Main.html">View Javadoc</a></div><pre>
 <a class="jxr_linenumber" name="L1" href="#L1">1</a>   <strong class="jxr_keyword">package</strong> fi.mcman.peli;
 <a class="jxr_linenumber" name="L2" href="#L2">2</a>   
-<a class="jxr_linenumber" name="L3" href="#L3">3</a>   <strong class="jxr_keyword">import</strong> fi.mcman.peli.logiikka.Pelaaja;
+<a class="jxr_linenumber" name="L3" href="#L3">3</a>   <strong class="jxr_keyword">import</strong> fi.mcman.peli.kayttoliittyma.Kayttoliittyma;
 <a class="jxr_linenumber" name="L4" href="#L4">4</a>   <strong class="jxr_keyword">import</strong> fi.mcman.peli.logiikka.Peli;
-<a class="jxr_linenumber" name="L5" href="#L5">5</a>   
-<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../fi/mcman/peli/Main.html">Main</a> {
-<a class="jxr_linenumber" name="L7" href="#L7">7</a>   
-<a class="jxr_linenumber" name="L8" href="#L8">8</a>       <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> main(String[] args) {
-<a class="jxr_linenumber" name="L9" href="#L9">9</a>           <a href="../../../fi/mcman/peli/logiikka/Peli.html">Peli</a> peli = <strong class="jxr_keyword">new</strong> <a href="../../../fi/mcman/peli/logiikka/Peli.html">Peli</a>();
-<a class="jxr_linenumber" name="L10" href="#L10">10</a>          <a href="../../../fi/mcman/peli/logiikka/Pelaaja.html">Pelaaja</a> pelaaja = peli.getPelaaja();
-<a class="jxr_linenumber" name="L11" href="#L11">11</a>          <strong class="jxr_keyword">if</strong> (pelaaja.onElossa()) {
-<a class="jxr_linenumber" name="L12" href="#L12">12</a>              System.out.println(<span class="jxr_string">"Elossa!"</span>);
-<a class="jxr_linenumber" name="L13" href="#L13">13</a>          }
-<a class="jxr_linenumber" name="L14" href="#L14">14</a>      }
-<a class="jxr_linenumber" name="L15" href="#L15">15</a>  
-<a class="jxr_linenumber" name="L16" href="#L16">16</a>  }
+<a class="jxr_linenumber" name="L5" href="#L5">5</a>   <strong class="jxr_keyword">import</strong> javax.swing.SwingUtilities;
+<a class="jxr_linenumber" name="L6" href="#L6">6</a>   
+<a class="jxr_linenumber" name="L7" href="#L7">7</a>   <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../fi/mcman/peli/Main.html">Main</a> {
+<a class="jxr_linenumber" name="L8" href="#L8">8</a>   
+<a class="jxr_linenumber" name="L9" href="#L9">9</a>       <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> main(String[] args) {
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>          <a href="../../../fi/mcman/peli/logiikka/Peli.html">Peli</a> peli = <strong class="jxr_keyword">new</strong> <a href="../../../fi/mcman/peli/logiikka/Peli.html">Peli</a>();
+<a class="jxr_linenumber" name="L11" href="#L11">11</a>          
+<a class="jxr_linenumber" name="L12" href="#L12">12</a>          <a href="../../../fi/mcman/peli/kayttoliittyma/Kayttoliittyma.html">Kayttoliittyma</a> liittyma = <strong class="jxr_keyword">new</strong> <a href="../../../fi/mcman/peli/kayttoliittyma/Kayttoliittyma.html">Kayttoliittyma</a>(peli);
+<a class="jxr_linenumber" name="L13" href="#L13">13</a>          peli.setPaivitettava(liittyma.getAlusta());
+<a class="jxr_linenumber" name="L14" href="#L14">14</a>          SwingUtilities.invokeLater(liittyma);
+<a class="jxr_linenumber" name="L15" href="#L15">15</a>  <em class="jxr_comment">//        liittyma.run();</em>
+<a class="jxr_linenumber" name="L16" href="#L16">16</a>  
+<a class="jxr_linenumber" name="L17" href="#L17">17</a>          peli.start();
+<a class="jxr_linenumber" name="L18" href="#L18">18</a>          
+<a class="jxr_linenumber" name="L19" href="#L19">19</a>      }
+<a class="jxr_linenumber" name="L20" href="#L20">20</a>  
+<a class="jxr_linenumber" name="L21" href="#L21">21</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2017. All rights reserved.</div>

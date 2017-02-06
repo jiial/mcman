@@ -45,7 +45,7 @@ public class PelaajaTest {
     public void liikkuuVasemmalle() {
         pelaaja.setSuunta(Suunta.VASEN);
         pelaaja.liiku();
-        assertEquals(peli.getAlusta().getLeveys()-2, pelaaja.getX());
+        assertEquals(298, pelaaja.getX());
     }
 
     @Test
@@ -54,14 +54,14 @@ public class PelaajaTest {
         pelaaja.liiku();
         pelaaja.setSuunta(Suunta.OIKEA);
         pelaaja.liiku();
-        assertEquals(peli.getAlusta().getLeveys()-1, pelaaja.getX());
+        assertEquals(300, pelaaja.getX());
     }
 
     @Test
     public void liikkuuYlos() {
         pelaaja.setSuunta(Suunta.YLOS);
         pelaaja.liiku();
-        assertEquals(peli.getAlusta().getKorkeus()-2, pelaaja.getY());
+        assertEquals(298, pelaaja.getY());
     }
 
     @Test
@@ -70,49 +70,52 @@ public class PelaajaTest {
         pelaaja.liiku();
         pelaaja.setSuunta(Suunta.ALAS);
         pelaaja.liiku();
-        assertEquals(peli.getAlusta().getKorkeus()-1, pelaaja.getY());
+        assertEquals(300, pelaaja.getY());
     }
 
     @Test
     public void eiLiikuUlosVasemmalta() {
+        pelaaja.siirra(4, 300);
         pelaaja.setSuunta(Suunta.VASEN);
-        for (int i = 0; i < peli.getAlusta().getLeveys()+2; i++) {
-            pelaaja.liiku();
-        }
+        pelaaja.liiku();
+        pelaaja.liiku();
+        pelaaja.liiku();
         assertEquals(0, pelaaja.getX());
     }
     
     @Test
     public void eiLiikuUlosYlhaalta() {
+        pelaaja.siirra(300, 4);
         pelaaja.setSuunta(Suunta.YLOS);
-        for (int i = 0; i < peli.getAlusta().getKorkeus()+2; i++) {
-            pelaaja.liiku();
-        }
+        pelaaja.liiku();
+        pelaaja.liiku();
+        pelaaja.liiku();
         assertEquals(0, pelaaja.getY());
     }
     
     @Test
     public void eiLiikuUlosOikealta() {
+        pelaaja.siirra(496, 300);
         pelaaja.setSuunta(Suunta.OIKEA);
         pelaaja.liiku();
         pelaaja.liiku();
         pelaaja.liiku();
-        assertEquals(peli.getAlusta().getLeveys()-1, pelaaja.getX());
+        assertEquals(peli.getAlusta().getLeveys()-2, pelaaja.getX());
     }
     
     @Test
     public void eiLiikuUlosAlhaalta() {
+        pelaaja.siirra(300, 496);
         pelaaja.setSuunta(Suunta.ALAS);
         pelaaja.liiku();
         pelaaja.liiku();
         pelaaja.liiku();
-        assertEquals(peli.getAlusta().getKorkeus()-1, pelaaja.getY());
+        assertEquals(peli.getAlusta().getKorkeus()-2, pelaaja.getY());
     }
     
     @Test
     public void kuoleeJosOsuuViholliseen() {
-        pelaaja.siirra(399, 399);
-        peli.lisaaVihollinen("Jorma", 398, 398, peli);
+        pelaaja.siirra(99, 99);
         peli.getViholliset().get(0).liiku();
         peli.getViholliset().get(0).liiku();
         pelaaja.osuukoViholliseen(peli.getViholliset().get(0));

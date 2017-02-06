@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
-public class Vihollinen extends Hahmo implements Paivitettava {
-  
+public class Vihollinen extends Hahmo {
+
     private int pieninX, suurinX, pieninY, suurinY;
     private Pelaaja kohde;
     private Random arpoja;
@@ -17,12 +17,12 @@ public class Vihollinen extends Hahmo implements Paivitettava {
         super.peli = peli;
         this.kohde = super.peli.getPelaaja();
         this.arpoja = new Random();
-        this.pieninX = 200;
-        this.pieninY = 200;
-        this.suurinX = 400;
-        this.suurinY = 400;
+        this.pieninX = 0;
+        this.pieninY = 0;
+        this.suurinX = 495;
+        this.suurinY = 495;
     }
-    
+
     @Override
     public void siirra(int x, int y) {
         this.x = x;
@@ -68,57 +68,64 @@ public class Vihollinen extends Hahmo implements Paivitettava {
     @Override
     public void liiku() {
         valitseSuunta();
-        if (super.suunta == Suunta.VASEN) {
+        if (suunta == Suunta.VASEN) {
             if (this.x > this.pieninX) {
                 this.x--;
             }
         }
-        if (super.suunta == Suunta.OIKEA) {
+        if (suunta == Suunta.OIKEA) {
             if (this.x < this.suurinX) {
                 this.x++;
             }
         }
-        if (super.suunta == Suunta.ALAS) {
+        if (suunta == Suunta.ALAS) {
             if (this.y < this.suurinY) {
                 this.y++;
             }
         }
-        if (super.suunta == Suunta.YLOS) {
+        if (suunta == Suunta.YLOS) {
             if (this.y > this.pieninY) {
                 this.y--;
             }
         }
     }
 
-    
     public void valitseSuunta() {
 
         if (kohde.getX() == this.x) {
-            if (kohde.getY() - this.y <= 20 && kohde.getY() - this.y > 0) {
+            if (kohde.getY() - this.y <= 90 && kohde.getY() - this.y > 0) {
                 this.suunta = Suunta.ALAS;
             }
-            if (kohde.getY() - this.y < 0 && kohde.getY() - this.y >= -20) {
+            if (kohde.getY() - this.y < 0 && kohde.getY() - this.y >= -90) {
                 this.suunta = Suunta.YLOS;
             }
         } else if (kohde.getY() == this.y) {
-            if (kohde.getX() - this.x <= 20 && kohde.getX() - this.x >= 0) {
+            if (kohde.getX() - this.x <= 90 && kohde.getX() - this.x >= 0) {
                 this.suunta = Suunta.ALAS;
             }
-            if (kohde.getX() - this.x < 0 && kohde.getX() - this.x >= -20) {
+            if (kohde.getX() - this.x < 0 && kohde.getX() - this.x >= -90) {
                 this.suunta = Suunta.YLOS;
             }
-        } else if (kohde.getX() - this.x <= 20 && kohde.getX() - this.x > 0) {
+        } else if (kohde.getX() - this.x <= 90 && kohde.getX() - this.x > 0) {
             this.suunta = Suunta.OIKEA;
-        } else if (kohde.getX() - this.x < 0 && kohde.getX() - this.x >= -20) {
+        } else if (kohde.getX() - this.x < 0 && kohde.getX() - this.x >= -90) {
             this.suunta = Suunta.VASEN;
-        } else if (kohde.getY() - this.y <= 20 && kohde.getY() - this.y > 0) {
+        } else if (kohde.getY() - this.y <= 90 && kohde.getY() - this.y > 0) {
             this.suunta = Suunta.ALAS;
-        } else if (kohde.getY() - this.y < 0 && kohde.getY() - this.y >= -20) {
+        } else if (kohde.getY() - this.y < 0 && kohde.getY() - this.y >= -90) {
             this.suunta = Suunta.YLOS;
         } else {
             arvoSuunta();
         }
     }
+
+//    public boolean onTahtaimessa(int a, int b) {
+//        if (a - b > -5 && a - b < 5) {
+//            return true;
+//        }
+//        return false;
+//
+//    }
 
     public void arvoSuunta() {
         int luku = this.arpoja.nextInt(3);
@@ -136,16 +143,10 @@ public class Vihollinen extends Hahmo implements Paivitettava {
         }
     }
 
-    
     public void piirra(Graphics g) {
         g.setColor(Color.red);
 //        g.drawRect(x, y, 30, 30);
-        g.fill3DRect(x, y, 30, 30, true);
-    }
-
-    @Override
-    public void paivita() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        g.fill3DRect(x - 5, y - 5, 30, 30, true);
     }
 
 }

@@ -116,7 +116,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.kayttoliittyma.Kayttoliittyma.java">fi/mcman/peli/kayttoliittyma/Kayttoliittyma.java</a>
+                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.logiikka.Hahmo.java">fi/mcman/peli/logiikka/Hahmo.java</a>
                 </td>
                 <td>
                   0
@@ -130,7 +130,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.logiikka.Liikkuva.java">fi/mcman/peli/logiikka/Liikkuva.java</a>
+                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.kayttoliittyma.Kayttoliittyma.java">fi/mcman/peli/kayttoliittyma/Kayttoliittyma.java</a>
                 </td>
                 <td>
                   0
@@ -186,7 +186,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.kayttoliittyma.Nappaimistonkuuntelija.java">fi/mcman/peli/kayttoliittyma/Nappaimistonkuuntelija.java</a>
+                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.logiikka.Vihollinen.java">fi/mcman/peli/logiikka/Vihollinen.java</a>
                 </td>
                 <td>
                   0
@@ -200,7 +200,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.logiikka.Vihollinen.java">fi/mcman/peli/logiikka/Vihollinen.java</a>
+                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.kayttoliittyma.NappaimistonKuuntelija.java">fi/mcman/peli/kayttoliittyma/NappaimistonKuuntelija.java</a>
                 </td>
                 <td>
                   0

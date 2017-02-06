@@ -35,7 +35,7 @@ public class Burgeri {
     
     public void piirra(Graphics g) {
         g.setColor(Color.orange);
-        g.drawOval(x, y, 10, 10);
+        g.fillOval(x, y, 10, 10);
     }
 
     

@@ -38,7 +38,6 @@ public class NappaimistonKuuntelija implements KeyListener {
             pelaaja.setSuunta(Suunta.ALAS);
             pelaaja.liiku();
         }
-        kl.getAlusta().paivita();
     }
 
     @Override

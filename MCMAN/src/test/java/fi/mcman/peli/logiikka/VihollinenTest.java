@@ -38,10 +38,6 @@ public class VihollinenTest {
         this.vihu = new Vihollinen("jorma", peli.getPelaaja().getX() - 1, peli.getPelaaja().getY() - 2, this.peli);
         vihu.setKohde(kohde);
         vihu.setArpoja(arpoja);
-        vihu.setSuurinX(peli.getAlusta().getLeveys() - 1);
-        vihu.setSuurinY(peli.getAlusta().getKorkeus() - 1);
-        vihu.setPieninX(peli.getAlusta().getLeveys() - 10);
-        vihu.setPieninY(peli.getAlusta().getKorkeus() - 10);
 
     }
 
@@ -55,7 +51,7 @@ public class VihollinenTest {
 
     @Test
     public void vihuLoytaaPelaajan2() {
-        vihu.siirra(peli.getAlusta().getLeveys() - 6, peli.getAlusta().getKorkeus() - 4);
+        vihu.siirra(peli.getPelaaja().getX() - 5, peli.getPelaaja().getY() - 3);
         vihu.liiku();
         vihu.liiku();
         vihu.liiku();
@@ -69,50 +65,46 @@ public class VihollinenTest {
 
     @Test
     public void eiMeneUlosOikealta() {
-        Pelaaja p = new Pelaaja(peli);
-        p.siirra(vihu.getX()+8, 0);
-        vihu.setKohde(p);
+        vihu.siirra(290, 290);
+        vihu.setSuurinX(292);
         vihu.liiku();
         vihu.liiku();
         vihu.liiku();
         vihu.liiku();
-        vihu.liiku();
-        assertEquals(peli.getAlusta().getLeveys()-1, vihu.getX());
+        assertEquals(292, vihu.getX());
     }
     
     @Test
     public void eiMeneUlosAlhaalta() {
-        Pelaaja p = new Pelaaja(peli);
-        p.siirra(0, vihu.getY()+7);
-        vihu.setKohde(p);
+        vihu.siirra(300, 290);
+        vihu.setSuurinY(292);
         vihu.liiku();
         vihu.liiku();
         vihu.liiku();
         vihu.liiku();
-        vihu.liiku();
-        assertEquals(peli.getAlusta().getKorkeus()-1, vihu.getY());
+        assertEquals(292, vihu.getY());
     }
     
     @Test
     public void eiMeneUlosVasemmalta() {
-        Pelaaja p = new Pelaaja(peli);
-        p.siirra(vihu.getX()-11, 0);
-        vihu.setKohde(p);
-        for (int i = 0; i < 15; i++) {
-            vihu.liiku();
-        }
-        assertEquals(peli.getAlusta().getLeveys()-10, vihu.getX());
+        vihu.siirra(310, 300);
+        vihu.setPieninX(308);
+        vihu.liiku();
+        vihu.liiku();
+        vihu.liiku();
+        vihu.liiku();
+        assertEquals(308, vihu.getX());
     }
     
     @Test
     public void eiMeneUlosYlhaalta() {
-        Pelaaja p = new Pelaaja(peli);
-        p.siirra(0, vihu.getY()-11);
-        vihu.setKohde(p);
-        for (int i = 0; i < 15; i++) {
-            vihu.liiku();
-        }
-        assertEquals(peli.getAlusta().getKorkeus()-10, vihu.getY());
+        vihu.siirra(300, 310);
+        vihu.setPieninY(308);
+        vihu.liiku();
+        vihu.liiku();
+        vihu.liiku();
+        vihu.liiku();
+        assertEquals(308, vihu.getY());
     }
     
     

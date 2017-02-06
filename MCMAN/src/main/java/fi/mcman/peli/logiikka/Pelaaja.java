@@ -5,14 +5,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 
-public class Pelaaja extends Hahmo implements Paivitettava {
+public class Pelaaja extends Hahmo {
     
     private boolean elossa;
    
     public Pelaaja(Peli peli) {
         super.nimi = "McMan";
-        super.x = 599;
-        super.y = 599;
+        super.x = 300;
+        super.y = 300;
         super.peli = peli;
         this.elossa = true;
     }
@@ -32,12 +32,11 @@ public class Pelaaja extends Hahmo implements Paivitettava {
         return nimi;
     }
 
-    @Override
+    
     public int getX() {
         return x;
     }
 
-    @Override
     public int getY() {
         return y;
     }
@@ -74,34 +73,32 @@ public class Pelaaja extends Hahmo implements Paivitettava {
     @Override
     public void liiku() {
         if (this.suunta == suunta.VASEN) {
-            if (this.x > 0) {
-                this.x--;
+            if (this.x > 1) {
+                this.x -= 2;
             }
         }
         if (this.suunta == suunta.OIKEA) {
-            if (this.x < this.peli.getAlusta().getLeveys() - 1) {
-                this.x++;
+            if (this.x < this.peli.getAlusta().getLeveys() - 2) {
+                this.x += 2;
             }
         }
         if (this.suunta == suunta.ALAS) {
-            if (this.y < this.peli.getAlusta().getKorkeus() - 1) {
-                this.y++;
+            if (this.y < this.peli.getAlusta().getKorkeus() - 2) {
+                this.y += 2;
             }
         }
         if (this.suunta == suunta.YLOS) {
-            if (this.y > 0) {
-                this.y--;
+            if (this.y > 1) {
+                this.y -= 2;
             }
         }
     }
     
     public void piirra(Graphics g) {
         g.setColor(Color.YELLOW);
-        g.drawOval(x, y, 20, 20);
+        g.fillOval(x, y, 20, 20);
+        
     }
 
-    @Override
-    public void paivita() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+    
 }

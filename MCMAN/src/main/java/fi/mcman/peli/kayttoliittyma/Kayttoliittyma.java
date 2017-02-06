@@ -34,7 +34,7 @@ public class Kayttoliittyma implements Runnable, Paivitettava {
     }
 
     public void luoKomponentit(Container container) {
-        this.alusta = new Piirtoalusta(peli, peli.getViholliset().get(0));
+        this.alusta = new Piirtoalusta(peli);
         this.peli.setPaivitettava(alusta);
         container.add(alusta);
         
