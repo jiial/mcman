@@ -4,8 +4,8 @@
 
 **Toiminnot:** 
   * Pelin pelaaminen
-      -Hahmon liikuttaminen nuolinäppäimillä
-      -Pisteiden kerääminen
+      1. Hahmon liikuttaminen nuolinäppäimillä
+      2. Pisteiden kerääminen
   * Nimen syöttäminen
   * Mahdollinen aloitusvalikko
   * Mahdollisesti vaikeusasteen valitseminen/highscorejen katselu
