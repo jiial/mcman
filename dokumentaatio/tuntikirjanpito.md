@@ -9,4 +9,6 @@ Päivä | Tunnit | Kuvaus
 30.01.2017 | 2.0h | Abstrakti luokka Hahmo, refaktorointia, käyttöliittymän suunnittelua
 31.01.2017 | 1.5h | Käyttöliittymän suunnittelua, alustavaa toteutusta ja kokeilua
 02.02.2017 | 1.0h | Luokkien yhteyksien tarkentamista, käyttöliittymän kokeilua, uusia testejä
+03.02.2017 | 2.5h | Käyttöliittymän kokeilua, riippuvuuksien ja ylimääräisen koodin karsimista
+06.02.2017 | 1.0h | Raporttien generointi, luokkakaavion päivitys, koodin siistiminen
 ... | ... | ...
