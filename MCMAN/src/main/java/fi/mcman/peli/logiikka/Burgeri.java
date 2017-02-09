@@ -1,10 +1,10 @@
-
 package fi.mcman.peli.logiikka;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
 public class Burgeri {
+
     private int x;
     private int y;
     private boolean syoty;
@@ -15,12 +15,10 @@ public class Burgeri {
         this.syoty = false;
     }
 
-    
     public int getX() {
         return x;
     }
 
-    
     public int getY() {
         return y;
     }
@@ -32,14 +30,15 @@ public class Burgeri {
     public void setSyoty(boolean syoty) {
         this.syoty = syoty;
     }
-    
+
     public void piirra(Graphics g) {
         g.setColor(Color.orange);
-        g.fillOval(x, y, 10, 10);
+        if (!syoty) {
+            g.fillOval(x, y, 20, 20);
+        } else {
+            
+        }
+
     }
 
-    
-    
-    
-    
 }

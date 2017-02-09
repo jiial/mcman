@@ -11,4 +11,6 @@ Päivä | Tunnit | Kuvaus
 02.02.2017 | 1.0h | Luokkien yhteyksien tarkentamista, käyttöliittymän kokeilua, uusia testejä
 03.02.2017 | 2.5h | Käyttöliittymän kokeilua, riippuvuuksien ja ylimääräisen koodin karsimista
 06.02.2017 | 1.0h | Raporttien generointi, luokkakaavion päivitys, koodin siistiminen
+07.02.2017 | 2.5h | Logiikan päivitystä, käyttöliittymän kokeilua, uusia testejä
+08.02.2017 | 0.5h | Peliin nälän käsite Nälkä-barin muodossa, kokeilua ja kikkailua
 ... | ... | ...

@@ -9,6 +9,7 @@ public class Vihollinen extends Hahmo {
     private int pieninX, suurinX, pieninY, suurinY;
     private Pelaaja kohde;
     private Random arpoja;
+    private int suunnanMuutos;
 
     public Vihollinen(String nimi, int x, int y, Peli peli) {
         super.nimi = nimi;
@@ -21,6 +22,7 @@ public class Vihollinen extends Hahmo {
         this.pieninY = 0;
         this.suurinX = 495;
         this.suurinY = 495;
+        this.suunnanMuutos = 0;
     }
 
     @Override
@@ -91,20 +93,27 @@ public class Vihollinen extends Hahmo {
     }
 
     public void valitseSuunta() {
-
+        
+        if (suunnanMuutos > 0) {
+            suunnanMuutos--;
+            return;
+        }
+        
         if (kohde.getX() == this.x) {
             if (kohde.getY() - this.y <= 90 && kohde.getY() - this.y > 0) {
                 this.suunta = Suunta.ALAS;
-            }
-            if (kohde.getY() - this.y < 0 && kohde.getY() - this.y >= -90) {
+            } else if (kohde.getY() - this.y < 0 && kohde.getY() - this.y >= -90) {
                 this.suunta = Suunta.YLOS;
+            } else {
+                arvoSuunta();
             }
         } else if (kohde.getY() == this.y) {
             if (kohde.getX() - this.x <= 90 && kohde.getX() - this.x >= 0) {
-                this.suunta = Suunta.ALAS;
-            }
-            if (kohde.getX() - this.x < 0 && kohde.getX() - this.x >= -90) {
-                this.suunta = Suunta.YLOS;
+                this.suunta = Suunta.OIKEA;
+            } else if (kohde.getX() - this.x < 0 && kohde.getX() - this.x >= -90) {
+                this.suunta = Suunta.VASEN;
+            } else {
+                arvoSuunta();
             }
         } else if (kohde.getX() - this.x <= 90 && kohde.getX() - this.x > 0) {
             this.suunta = Suunta.OIKEA;
@@ -128,18 +137,22 @@ public class Vihollinen extends Hahmo {
 //    }
 
     public void arvoSuunta() {
-        int luku = this.arpoja.nextInt(3);
+        int luku = this.arpoja.nextInt(4);
         if (luku == 0) {
             this.suunta = suunta.VASEN;
+            suunnanMuutos = 30;
         }
         if (luku == 1) {
             this.suunta = suunta.OIKEA;
+            suunnanMuutos = 30;
         }
         if (luku == 2) {
             this.suunta = suunta.ALAS;
+            suunnanMuutos = 30;
         }
         if (luku == 3) {
             this.suunta = suunta.YLOS;
+            suunnanMuutos = 30;
         }
     }
 

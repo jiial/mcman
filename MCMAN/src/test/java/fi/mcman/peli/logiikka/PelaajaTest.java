@@ -118,8 +118,14 @@ public class PelaajaTest {
         pelaaja.siirra(99, 99);
         peli.getViholliset().get(0).liiku();
         peli.getViholliset().get(0).liiku();
-        pelaaja.osuukoViholliseen(peli.getViholliset().get(0));
+        pelaaja.osuuViholliseen(peli.getViholliset().get(0));
         assertFalse(pelaaja.onElossa());
+    }
+    
+    @Test
+    public void osuuBurgerinToimiiOikein() {
+        pelaaja.siirra(50, 50);
+        assertTrue(pelaaja.osuuBurgeriin(peli.getBurgerit().get(0)));
     }
 
     @After

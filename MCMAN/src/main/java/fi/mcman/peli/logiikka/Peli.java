@@ -16,23 +16,30 @@ public class Peli extends Timer implements ActionListener {
     private boolean voittiko;
     private Paivitettava paivitettava;
     private Kayttoliittyma kl;
+    private int pisteet;
+    private int nalka;
 
     public Peli() {
-        super(40, null);
+        super(30, null);
         this.alusta = new Pelialusta(500, 500);
         this.pelaaja = new Pelaaja(this);
-        this.voittiko = false;
         this.viholliset = new ArrayList<>();
         this.burgerit = new ArrayList<>();
-        burgerit.add(new Burgeri(100, 100));
+        this.voittiko = false;
+        this.pisteet = 0;
 
         addActionListener(this);
         luoViholliset();
+        luoBurgerit();
 
     }
 
     public void setPaivitettava(Paivitettava p) {
         this.paivitettava = p;
+    }
+
+    public void setNalka(int nalka) {
+        this.nalka = nalka;
     }
 
     public void setKl(Kayttoliittyma kl) {
@@ -55,17 +62,23 @@ public class Peli extends Timer implements ActionListener {
         return viholliset;
     }
 
-    public boolean jatkuuko() {
+    public int getPisteet() {
+        return pisteet;
+    }
+
+    public boolean jatkuu() {
         if (this.pelaaja.onElossa()) {
             if (onBurgereita()) {
-                return true;
+                if (nalka < 500) {
+                    return true;
+                }
             } else {
                 voittiko = true;
                 return false;
             }
-        } else {
-            return false;
         }
+        return false;
+
     }
 
     public boolean onBurgereita() {
@@ -84,11 +97,42 @@ public class Peli extends Timer implements ActionListener {
         this.viholliset.add(new Vihollinen("4", 400, 400, this));
     }
 
+    public void luoBurgerit() {
+        for (int x = 50; x < 500; x += 50) {
+            for (int y = 50; y < 500; y += 50) {
+                this.burgerit.add(new Burgeri(x, y));
+            }
+        }
+    }
+
+    public int getNalka() {
+        return nalka;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (!jatkuuko()) {
+        if (!jatkuu()) {
             return;
         }
+        nalka++;
+        for (Burgeri b : burgerit) {
+            if (pelaaja.osuuBurgeriin(b)) {
+                if (!b.isSyoty()) {
+                    b.setSyoty(true);
+                    pisteet++;
+                    if (pisteet < 0) {
+                        pisteet = 0;
+                    }
+                    nalka -= 50;
+                }
+            }
+        }
+        for (Vihollinen v : viholliset) {
+            if (pelaaja.osuuViholliseen(v)) {
+                pelaaja.kuolee();
+            }
+        }
+
         for (Vihollinen v : this.viholliset) {
             v.liiku();
         }

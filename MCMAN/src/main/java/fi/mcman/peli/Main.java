@@ -10,10 +10,17 @@ public class Main {
         Peli peli = new Peli();
         
         Kayttoliittyma liittyma = new Kayttoliittyma(peli);
-        peli.setPaivitettava(liittyma.getAlusta());
         SwingUtilities.invokeLater(liittyma);
-//        liittyma.run();
+        
+        while(liittyma.getAlusta() == null) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                System.out.println("Piirtoalustaa ei ole vielä luotu");
+            }
+        }
 
+        peli.setPaivitettava(liittyma.getAlusta());
         peli.start();
         
     }

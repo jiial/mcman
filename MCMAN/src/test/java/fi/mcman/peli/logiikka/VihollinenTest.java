@@ -46,7 +46,7 @@ public class VihollinenTest {
         vihu.liiku();
         vihu.liiku();
         vihu.liiku();
-        assertTrue(kohde.osuukoViholliseen(vihu));
+        assertTrue(kohde.osuuViholliseen(vihu));
     }
 
     @Test
@@ -60,7 +60,7 @@ public class VihollinenTest {
         vihu.liiku();
         vihu.liiku();
         vihu.liiku();
-        assertTrue(kohde.osuukoViholliseen(vihu));
+        assertTrue(kohde.osuuViholliseen(vihu));
     }
 
     @Test

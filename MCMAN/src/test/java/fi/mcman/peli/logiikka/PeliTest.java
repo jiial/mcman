@@ -30,19 +30,21 @@ public class PeliTest {
     
     @Test
     public void peliJatkuuAluksi() {
-        assertTrue(peli.jatkuuko());
+        assertTrue(peli.jatkuu());
     }
     
     @Test
     public void peliEiJatkuKunPelaajaKuollut() {
         peli.getPelaaja().kuolee();
-        assertFalse(peli.jatkuuko());
+        assertFalse(peli.jatkuu());
     }
     
     @Test
     public void peliEiJatkuKunPelaajaSyoKaikkiBurgeritEliVoittaa() {
-        peli.getBurgerit().get(0).setSyoty(true);
-        assertFalse(peli.jatkuuko());
+        for (Burgeri b : peli.getBurgerit()) {
+            b.setSyoty(true);
+        }
+        assertFalse(peli.jatkuu());
     }
     
     @Test
@@ -50,7 +52,23 @@ public class PeliTest {
         assertTrue(peli.onBurgereita());
     }
     
+    @Test
+    public void pisteetAlussaNolla() {
+        assertEquals(0, peli.getPisteet());
+    }
     
+    @Test
+    public void pisteetKasvavatKunPelaajaSyoBurgerin() {
+        
+        
+    }
+    
+    @Test
+    public void peliLoppuuKunNalkaKasvaaLiianSuureksi() {
+        peli.setNalka(500);
+        assertFalse(peli.jatkuu());
+    }
+
     
     
     @After

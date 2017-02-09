@@ -55,14 +55,14 @@ public class Pelaaja extends Hahmo {
         this.elossa = false;
     }
     
-    public boolean osuukoBurgeriin(Burgeri b) {
+    public boolean osuuBurgeriin(Burgeri b) {
         if (this.x == b.getX() && this.y == b.getY()) {
             return true;
         } 
         return false;
     }
     
-    public boolean osuukoViholliseen(Vihollinen v) {
+    public boolean osuuViholliseen(Vihollinen v) {
         if (this.x == v.getX() && this.y == v.getY()) {
             kuolee();
             return true;
