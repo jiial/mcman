@@ -13,4 +13,6 @@ Päivä | Tunnit | Kuvaus
 06.02.2017 | 1.0h | Raporttien generointi, luokkakaavion päivitys, koodin siistiminen
 07.02.2017 | 2.5h | Logiikan päivitystä, käyttöliittymän kokeilua, uusia testejä
 08.02.2017 | 0.5h | Peliin nälän käsite Nälkä-barin muodossa, kokeilua ja kikkailua
+09.02.2017 | 2.0h | Kenttäsuunnittelun järkeilyä, käyttöliittymällä kikkailua ja background testi
+10.02.2017 | 6.5h | Kenttäsuunnittelu: luokat Taso ja Tiili, liikkumisesteet, dokumentaation päivitys
 ... | ... | ...

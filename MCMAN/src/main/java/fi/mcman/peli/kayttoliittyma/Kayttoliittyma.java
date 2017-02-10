@@ -1,23 +1,28 @@
 package fi.mcman.peli.kayttoliittyma;
 
-import fi.mcman.peli.logiikka.Paivitettava;
-import fi.mcman.peli.logiikka.Pelaaja;
 import fi.mcman.peli.logiikka.Peli;
 import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-public class Kayttoliittyma implements Runnable, Paivitettava {
+/**
+ * 
+ * @author ljone
+ * 
+ * Toimii päärunkona graafiselle käyttöliittymälle.
+ * Luo tarvittavat komponentit ja hoitaa niiden asetukset ja yhteydet kuntoon.
+ * 
+ */
+
+public class Kayttoliittyma implements Runnable {
 
     private Peli peli;
     private Piirtoalusta alusta;
     private JFrame frame;
-    private Pelaaja pelaaja;
 
     public Kayttoliittyma(Peli peli) {
         this.peli = peli;
-        this.pelaaja = peli.getPelaaja();
     }
 
     @Override
@@ -53,23 +58,5 @@ public class Kayttoliittyma implements Runnable, Paivitettava {
     public Peli getPeli() {
         return peli;
     }
-
-    @Override
-    public void paivita() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int getX() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int getY() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-    
 
 }

@@ -1,6 +1,14 @@
 
 package fi.mcman.peli.logiikka;
 
+/**
+ * 
+ * @author ljone
+ * 
+ * Tämä luokka kuvaa yksinkertaisesti vain pelialueen kokoa (leveys, korkeus).
+ * 
+ */
+
 public class Pelialusta {
     private int leveys;
     private int korkeus;

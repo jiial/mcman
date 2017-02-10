@@ -8,6 +8,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * 
+ * @author ljone
+ * 
+ * Testaa luokan Peli toimintaa.
+ * 
+ */
+
 public class PeliTest {
     private Peli peli;
     

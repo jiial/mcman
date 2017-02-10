@@ -1,6 +1,14 @@
 
 package fi.mcman.peli.logiikka;
 
+/**
+ * 
+ * @author ljone
+ * 
+ * Abstrakti luokka jonka perivät pelin hahmot eli Pelaaja ja Vihollinen -luokkien oliot.
+ * Luokassa hahmojen yhteisiä muuttujia ja metodeja joita tarvitaan sijainnin selvittämiseen ja liikkumiseen.
+ * 
+ */
 
 public abstract class Hahmo {
     protected String nimi;

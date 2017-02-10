@@ -8,9 +8,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
+ * 
  * @author ljone
+ * 
+ * Testaa luokan Pelaaja toimintaa.
+ * 
  */
+
 public class PelaajaTest {
 
     private Pelaaja pelaaja;
@@ -75,42 +79,38 @@ public class PelaajaTest {
 
     @Test
     public void eiLiikuUlosVasemmalta() {
-        pelaaja.siirra(4, 300);
+        pelaaja.siirra(20, 20);
         pelaaja.setSuunta(Suunta.VASEN);
         pelaaja.liiku();
         pelaaja.liiku();
-        pelaaja.liiku();
-        assertEquals(0, pelaaja.getX());
+        assertEquals(20, pelaaja.getX());
     }
     
     @Test
     public void eiLiikuUlosYlhaalta() {
-        pelaaja.siirra(300, 4);
+        pelaaja.siirra(20, 20);
         pelaaja.setSuunta(Suunta.YLOS);
         pelaaja.liiku();
         pelaaja.liiku();
-        pelaaja.liiku();
-        assertEquals(0, pelaaja.getY());
+        assertEquals(20, pelaaja.getY());
     }
     
     @Test
     public void eiLiikuUlosOikealta() {
-        pelaaja.siirra(496, 300);
+        pelaaja.siirra(480, 480);
         pelaaja.setSuunta(Suunta.OIKEA);
         pelaaja.liiku();
         pelaaja.liiku();
-        pelaaja.liiku();
-        assertEquals(peli.getAlusta().getLeveys()-2, pelaaja.getX());
+        assertEquals(peli.getAlusta().getLeveys()-20, pelaaja.getX());
     }
     
     @Test
     public void eiLiikuUlosAlhaalta() {
-        pelaaja.siirra(300, 496);
+        pelaaja.siirra(480, 480);
         pelaaja.setSuunta(Suunta.ALAS);
         pelaaja.liiku();
         pelaaja.liiku();
-        pelaaja.liiku();
-        assertEquals(peli.getAlusta().getKorkeus()-2, pelaaja.getY());
+        assertEquals(peli.getAlusta().getKorkeus()-20, pelaaja.getY());
     }
     
     @Test

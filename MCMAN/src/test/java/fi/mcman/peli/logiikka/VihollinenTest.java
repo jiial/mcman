@@ -11,6 +11,9 @@ import static org.junit.Assert.*;
 /**
  *
  * @author ljone
+ * 
+ * Testaa luokan Vihollinen toimintaa eri metodeilla ja syötteillä.
+ * 
  */
 public class VihollinenTest {
 

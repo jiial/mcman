@@ -6,6 +6,15 @@ import fi.mcman.peli.logiikka.Suunta;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * 
+ * @author ljone
+ * 
+ * Luokkaa tarvitaan pelaajan liikuttamiseen.
+ * @see logiikka.Pelaaja#liiku()
+ * 
+ */
+
 public class NappaimistonKuuntelija implements KeyListener {
     private Kayttoliittyma kl;
     private Pelaaja pelaaja;

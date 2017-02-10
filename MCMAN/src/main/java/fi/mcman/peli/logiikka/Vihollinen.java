@@ -4,6 +4,18 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
+/**
+ * 
+ * @author ljone
+ * 
+ * Luokkassa pelin vihollisten toiminnallisuus.
+ * Luokan tärkein ominaisuus on tekoäly jonka mukaan vihollinen liikkuu.
+ * @see liiku() valitseSuunta() arvoSuunta()
+ * 
+ * Perii abstraktin luokan Hahmo.
+ * 
+ */
+
 public class Vihollinen extends Hahmo {
 
     private int pieninX, suurinX, pieninY, suurinY;
@@ -20,8 +32,8 @@ public class Vihollinen extends Hahmo {
         this.arpoja = new Random();
         this.pieninX = 0;
         this.pieninY = 0;
-        this.suurinX = 495;
-        this.suurinY = 495;
+        this.suurinX = 480;
+        this.suurinY = 480;
         this.suunnanMuutos = 0;
     }
 
@@ -159,7 +171,7 @@ public class Vihollinen extends Hahmo {
     public void piirra(Graphics g) {
         g.setColor(Color.red);
 //        g.drawRect(x, y, 30, 30);
-        g.fill3DRect(x - 5, y - 5, 30, 30, true);
+        g.fill3DRect(x, y, 20, 20, true);
     }
 
 }

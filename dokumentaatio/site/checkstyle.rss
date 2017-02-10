@@ -25,7 +25,7 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2017</copyright>
     <item>
-      <title>File: 12,
+      <title>File: 14,
              Errors: 0,
              Warnings: 0,
              Infos: 0
@@ -46,6 +46,76 @@ under the License.
           <tbody>
                           <tr>
                 <td>
+                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.logiikka.Paivitettava.java">fi/mcman/peli/logiikka/Paivitettava.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.logiikka.Hahmo.java">fi/mcman/peli/logiikka/Hahmo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.kayttoliittyma.Piirtoalusta.java">fi/mcman/peli/kayttoliittyma/Piirtoalusta.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.logiikka.Vihollinen.java">fi/mcman/peli/logiikka/Vihollinen.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.kayttoliittyma.NappaimistonKuuntelija.java">fi/mcman/peli/kayttoliittyma/NappaimistonKuuntelija.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="${project.url}/checkstyle.html#fi.mcman.peli.logiikka.Burgeri.java">fi/mcman/peli/logiikka/Burgeri.java</a>
                 </td>
                 <td>
@@ -60,7 +130,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.logiikka.Paivitettava.java">fi/mcman/peli/logiikka/Paivitettava.java</a>
+                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.logiikka.Tiili.java">fi/mcman/peli/logiikka/Tiili.java</a>
                 </td>
                 <td>
                   0
@@ -116,20 +186,6 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.logiikka.Hahmo.java">fi/mcman/peli/logiikka/Hahmo.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="${project.url}/checkstyle.html#fi.mcman.peli.kayttoliittyma.Kayttoliittyma.java">fi/mcman/peli/kayttoliittyma/Kayttoliittyma.java</a>
                 </td>
                 <td>
@@ -172,35 +228,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.kayttoliittyma.Piirtoalusta.java">fi/mcman/peli/kayttoliittyma/Piirtoalusta.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.logiikka.Vihollinen.java">fi/mcman/peli/logiikka/Vihollinen.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.kayttoliittyma.NappaimistonKuuntelija.java">fi/mcman/peli/kayttoliittyma/NappaimistonKuuntelija.java</a>
+                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.logiikka.Taso.java">fi/mcman/peli/logiikka/Taso.java</a>
                 </td>
                 <td>
                   0
