@@ -1,8 +1,5 @@
 package fi.mcman.peli.logiikka;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
 /**
  * 
  * @author ljone
@@ -44,16 +41,6 @@ public class Burgeri {
         this.syoty = syoty;
     }
 
-    /**
-     * Kertoo kuinka burgeri piirretään.
-     * @param g javassa piirtämiseen vaadittava parametri
-     */
-    
-    public void piirra(Graphics g) {
-        g.setColor(Color.orange);
-        if (!syoty) {
-            g.fillOval(x + 5, y + 5, 10, 10);
-        }
-    }
+  
 
 }

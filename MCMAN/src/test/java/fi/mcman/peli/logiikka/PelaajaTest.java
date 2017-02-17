@@ -49,7 +49,7 @@ public class PelaajaTest {
     public void liikkuuVasemmalle() {
         pelaaja.setSuunta(Suunta.VASEN);
         pelaaja.liiku();
-        assertEquals(298, pelaaja.getX());
+        assertEquals(338, pelaaja.getX());
     }
 
     @Test
@@ -58,14 +58,14 @@ public class PelaajaTest {
         pelaaja.liiku();
         pelaaja.setSuunta(Suunta.OIKEA);
         pelaaja.liiku();
-        assertEquals(300, pelaaja.getX());
+        assertEquals(340, pelaaja.getX());
     }
 
     @Test
     public void liikkuuYlos() {
         pelaaja.setSuunta(Suunta.YLOS);
         pelaaja.liiku();
-        assertEquals(298, pelaaja.getY());
+        assertEquals(378, pelaaja.getY());
     }
 
     @Test
@@ -74,7 +74,7 @@ public class PelaajaTest {
         pelaaja.liiku();
         pelaaja.setSuunta(Suunta.ALAS);
         pelaaja.liiku();
-        assertEquals(300, pelaaja.getY());
+        assertEquals(380, pelaaja.getY());
     }
 
     @Test
@@ -97,25 +97,25 @@ public class PelaajaTest {
     
     @Test
     public void eiLiikuUlosOikealta() {
-        pelaaja.siirra(480, 480);
+        pelaaja.siirra(460, 460);
         pelaaja.setSuunta(Suunta.OIKEA);
         pelaaja.liiku();
         pelaaja.liiku();
-        assertEquals(peli.getAlusta().getLeveys()-20, pelaaja.getX());
+        assertEquals(peli.getAlusta().getLeveys()-40, pelaaja.getX());
     }
     
     @Test
     public void eiLiikuUlosAlhaalta() {
-        pelaaja.siirra(480, 480);
+        pelaaja.siirra(460, 460);
         pelaaja.setSuunta(Suunta.ALAS);
         pelaaja.liiku();
         pelaaja.liiku();
-        assertEquals(peli.getAlusta().getKorkeus()-20, pelaaja.getY());
+        assertEquals(peli.getAlusta().getKorkeus()-40, pelaaja.getY());
     }
     
     @Test
     public void kuoleeJosOsuuViholliseen() {
-        pelaaja.siirra(99, 99);
+        pelaaja.siirra(20, 22);
         peli.getViholliset().get(0).liiku();
         peli.getViholliset().get(0).liiku();
         pelaaja.osuuViholliseen(peli.getViholliset().get(0));
@@ -124,7 +124,7 @@ public class PelaajaTest {
     
     @Test
     public void osuuBurgerinToimiiOikein() {
-        pelaaja.siirra(50, 50);
+        pelaaja.siirra(20, 20);
         assertTrue(pelaaja.osuuBurgeriin(peli.getBurgerit().get(0)));
     }
 

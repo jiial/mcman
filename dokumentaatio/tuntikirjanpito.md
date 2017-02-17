@@ -15,4 +15,8 @@ Päivä | Tunnit | Kuvaus
 08.02.2017 | 0.5h | Peliin nälän käsite Nälkä-barin muodossa, kokeilua ja kikkailua
 09.02.2017 | 2.0h | Kenttäsuunnittelun järkeilyä, käyttöliittymällä kikkailua ja background testi
 10.02.2017 | 6.5h | Kenttäsuunnittelu: luokat Taso ja Tiili, liikkumisesteet, dokumentaation päivitys
+13.02.2017 | 3.5h | Bugien korjausta, vihollisen tekoälyn järkeilyä (seinät)
+14.02.2017 | 1.5h | Vihollisen tekoälyn ja pelaajan liikkumisen järkeilyä
+16.02.2017 | 2.0h | Vihollisen logiikan hiomista, pelaajan liikkumisen ja pelin päivityksen säätämistä
+17.02.2017 | 5.0h | Kenttäsuunnittelu, kuvia, logiikan hiomista
 ... | ... | ...

@@ -38,7 +38,7 @@ public class VihollinenTest {
         this.arpoja = new Random();
         this.peli = new Peli();
         this.kohde = peli.getPelaaja();
-        this.vihu = new Vihollinen("jorma", peli.getPelaaja().getX() - 1, peli.getPelaaja().getY() - 2, this.peli);
+        this.vihu = new Vihollinen("jorma", peli.getPelaaja().getX(), peli.getPelaaja().getY() - 2, this.peli);
         vihu.setKohde(kohde);
         vihu.setArpoja(arpoja);
 
@@ -48,16 +48,12 @@ public class VihollinenTest {
     public void vihuLoytaaPelaajan() {
         vihu.liiku();
         vihu.liiku();
-        vihu.liiku();
         assertTrue(kohde.osuuViholliseen(vihu));
     }
 
     @Test
     public void vihuLoytaaPelaajan2() {
-        vihu.siirra(peli.getPelaaja().getX() - 5, peli.getPelaaja().getY() - 3);
-        vihu.liiku();
-        vihu.liiku();
-        vihu.liiku();
+        vihu.siirra(peli.getPelaaja().getX() - 5, peli.getPelaaja().getY());
         vihu.liiku();
         vihu.liiku();
         vihu.liiku();
@@ -79,13 +75,10 @@ public class VihollinenTest {
     
     @Test
     public void eiMeneUlosAlhaalta() {
-        vihu.siirra(300, 290);
-        vihu.setSuurinY(292);
+        vihu.siirra(340, 370);
+        vihu.setSuurinY(370);
         vihu.liiku();
-        vihu.liiku();
-        vihu.liiku();
-        vihu.liiku();
-        assertEquals(292, vihu.getY());
+        assertEquals(370, vihu.getY());
     }
     
     @Test

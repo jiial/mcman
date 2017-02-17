@@ -73,7 +73,7 @@ public class PeliTest {
     
     @Test
     public void peliLoppuuKunNalkaKasvaaLiianSuureksi() {
-        peli.setNalka(500);
+        peli.setNalka(1500);
         assertFalse(peli.jatkuu());
     }
 

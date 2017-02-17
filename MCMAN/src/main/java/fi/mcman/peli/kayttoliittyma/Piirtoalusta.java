@@ -4,6 +4,7 @@ import fi.mcman.peli.logiikka.Burgeri;
 import fi.mcman.peli.logiikka.Paivitettava;
 import fi.mcman.peli.logiikka.Pelaaja;
 import fi.mcman.peli.logiikka.Peli;
+import fi.mcman.peli.logiikka.Suunta;
 import fi.mcman.peli.logiikka.Taso;
 import fi.mcman.peli.logiikka.Vihollinen;
 import java.awt.Color;
@@ -16,13 +17,12 @@ import java.awt.image.*;
 import javax.imageio.ImageIO;
 
 /**
- * 
+ *
  * @author ljone
- * 
+ *
  * Luokka hoitaa kaikkien komponenttien piirtämisen ruudulle.
- * 
+ *
  */
-
 public class Piirtoalusta extends JPanel implements Paivitettava {
 
     private Peli peli;
@@ -48,33 +48,86 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     public void paintComponent(Graphics g) {
 
         super.paintComponent(g);
-//        if (onTaso == false) {
-//            taso.piirra(g);
-//        }
-//        onTaso = true;
         try {
-            BufferedImage kuva = ImageIO.read(getClass().getResourceAsStream("/bg2.png"));
+            BufferedImage kuva = ImageIO.read(getClass().getResourceAsStream("/bg3.png"));
             g.drawImage(kuva, 0, 0, null);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        pelaaja.piirra(g);
-        for (Vihollinen v : viholliset) {
-            v.piirra(g);
+        piirraPelaaja(g);
+        piirraViholliset(g);
+        piirraBurgerit(g);
+        piirraNalkapalkki(g);
+
+        if (!peli.jatkuu()) {
+            ilmoitusKunHaviaa(g);
         }
-        for (Burgeri b : peli.getBurgerit()) {
-            b.piirra(g);
+
+    }
+
+    @Override
+    public void paivita() {
+        repaint();
+        pisteet.setText("Pisteet: " + peli.getPisteet());
+    }
+
+    public void piirraPelaaja(Graphics g) {
+        try {
+            BufferedImage kuvaV = ImageIO.read(getClass().getResourceAsStream("/pv.png"));
+            BufferedImage kuvaO = ImageIO.read(getClass().getResourceAsStream("/po.png"));
+            if (pelaaja.getSuunta() == Suunta.VASEN) {
+                g.drawImage(kuvaV, pelaaja.getX(), pelaaja.getY(), null);
+            } else {
+                g.drawImage(kuvaO, pelaaja.getX(), pelaaja.getY(), null);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        if (peli.getNalka() < 200) {
+//        g.setColor(Color.YELLOW);
+//        g.fillOval(pelaaja.getX(), pelaaja.getY(), 20, 20);
+    }
+
+    public void piirraViholliset(Graphics g) {
+        g.setColor(Color.red);
+        for (Vihollinen v : peli.getViholliset()) {
+            g.fill3DRect(v.getX(), v.getY(), 20, 20, true);
+        }
+    }
+
+    public void piirraBurgerit(Graphics g) {
+        try {
+            BufferedImage kuva = ImageIO.read(getClass().getResourceAsStream("/burgeri.png"));
+            for (Burgeri b : peli.getBurgerit()) {
+                if (!b.isSyoty()) {
+                    g.drawImage(kuva, b.getX(), b.getY(), null);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        g.setColor(Color.orange);
+//        for (Burgeri b : peli.getBurgerit()) {
+//            if (!b.isSyoty()) {
+//                g.fillOval(b.getX() + 5, b.getY() + 5, 10, 10);
+//            }
+//
+//        }
+    }
+
+    public void piirraNalkapalkki(Graphics g) {
+        g.setColor(Color.WHITE);
+        int alkuX = 30;
+        int alkuY = 530;
+        g.drawRect(alkuX - 2, alkuY - 2, 388, 19);
+        if (peli.getNalka() < 500) {
             g.setColor(Color.GREEN);
-        } else if (peli.getNalka() < 375) {
+        } else if (peli.getNalka() < 1000) {
             g.setColor(Color.orange);
         } else {
             g.setColor(Color.RED);
         }
-        int neliot = peli.getNalka() / 10;
-        int alkuX = 30;
-        int alkuY = 530;
+        int neliot = peli.getNalka() / 20;
         if (peli.getNalka() < 5) {
             g.fillRect(alkuX, alkuY, 1, 15);
         } else {
@@ -86,20 +139,13 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         g.setColor(Color.WHITE);
         Font fontti = new Font("Arial", Font.PLAIN, 20);
         g.setFont(fontti);
-        g.drawString("Nälkä", 30, 520);
-
-        if (!peli.jatkuu()) {
-            Font ripFontti = new Font("Century Gothic", Font.PLAIN, 90);
-            g.setFont(ripFontti);
-            g.drawString("R I P", 210, 270);
-        }
-
+        g.drawString("Nälkä", 30, 525);
     }
 
-    @Override
-    public void paivita() {
-        repaint();
-        pisteet.setText("Pisteet: " + peli.getPisteet());
+    public void ilmoitusKunHaviaa(Graphics g) {
+        Font ripFontti = new Font("Century Gothic", Font.PLAIN, 90);
+        g.setFont(ripFontti);
+        g.drawString("R I P", 150, 310);
     }
 
 }
