@@ -19,3 +19,6 @@
 [id]: https://github.com/jiial/mcman/blob/master/dokumentaatio/luokkakaavio.png
 ![Luokkakaavio][id]
 
+![Alt text](/home/ljone/mcman/dokumentaatio/pelaajaliikkuu.png "Pelaaja liikkuu")
+
+![Alt text](/home/ljone/mcman/dokumentaatio/pelaajaaloittaapelin.png "Pelaaja aloittaa pelin")

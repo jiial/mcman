@@ -8,13 +8,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * 
- * @author ljone
- * 
  * Testaa luokan Pelaaja toimintaa.
- * 
+ *
+ * @author ljone
  */
-
 public class PelaajaTest {
 
     private Pelaaja pelaaja;
@@ -43,6 +40,17 @@ public class PelaajaTest {
     @Test
     public void onElossaAluksi() {
         assertTrue(pelaaja.onElossa());
+    }
+    
+    @Test
+    public void nimiAsetetaanOikein() {
+        assertEquals("McMan", pelaaja.getNimi());
+    }
+    
+    @Test
+    public void suuntaAsetetaanOikein() {
+        pelaaja.setSuunta(Suunta.OIKEA);
+        assertEquals(Suunta.OIKEA, pelaaja.getSuunta());
     }
 
     @Test
@@ -85,7 +93,7 @@ public class PelaajaTest {
         pelaaja.liiku();
         assertEquals(20, pelaaja.getX());
     }
-    
+
     @Test
     public void eiLiikuUlosYlhaalta() {
         pelaaja.siirra(20, 20);
@@ -94,25 +102,25 @@ public class PelaajaTest {
         pelaaja.liiku();
         assertEquals(20, pelaaja.getY());
     }
-    
+
     @Test
     public void eiLiikuUlosOikealta() {
         pelaaja.siirra(460, 460);
         pelaaja.setSuunta(Suunta.OIKEA);
         pelaaja.liiku();
         pelaaja.liiku();
-        assertEquals(peli.getAlusta().getLeveys()-40, pelaaja.getX());
+        assertEquals(peli.getAlusta().getLeveys() - 40, pelaaja.getX());
     }
-    
+
     @Test
     public void eiLiikuUlosAlhaalta() {
         pelaaja.siirra(460, 460);
         pelaaja.setSuunta(Suunta.ALAS);
         pelaaja.liiku();
         pelaaja.liiku();
-        assertEquals(peli.getAlusta().getKorkeus()-40, pelaaja.getY());
+        assertEquals(peli.getAlusta().getKorkeus() - 40, pelaaja.getY());
     }
-    
+
     @Test
     public void kuoleeJosOsuuViholliseen() {
         pelaaja.siirra(20, 22);
@@ -123,9 +131,55 @@ public class PelaajaTest {
     }
     
     @Test
+    public void osuuViholliseenToimiiOikein() {
+        pelaaja.siirra(20, 22);
+        Vihollinen v = peli.getViholliset().get(0);
+        assertFalse(pelaaja.osuuViholliseen(v));
+    }
+
+    @Test
     public void osuuBurgerinToimiiOikein() {
         pelaaja.siirra(20, 20);
         assertTrue(pelaaja.osuuBurgeriin(peli.getBurgerit().get(0)));
+    }
+    
+    @Test
+    public void voiLiikkuaAlasToimiiOikein() {
+        assertFalse(pelaaja.voiLiikkuaAlas(460, 460));
+    }
+    
+    @Test
+    public void voiLiikkuaYlosToimiiOikein() {
+        assertFalse(pelaaja.voiLiikkuaYlos(20, 20));
+    }
+    
+    @Test
+    public void voiLiikkuaOikealleToimiiOikein() {
+        assertFalse(pelaaja.voiLiikkuaOikealle(460, 460));
+    }
+    
+    @Test
+    public void voiLiikkuaVasemmalleToimiiOikein() {
+        assertFalse(pelaaja.voiLiikkuaVasemmalle(20, 20));
+    }
+    @Test
+    public void voiLiikkuaAlasToimiiOikein2() {
+        assertTrue(pelaaja.voiLiikkuaAlas(460, 450));
+    }
+    
+    @Test
+    public void voiLiikkuaYlosToimiiOikein2() {
+        assertTrue(pelaaja.voiLiikkuaYlos(20, 30));
+    }
+    
+    @Test
+    public void voiLiikkuaOikealleToimiiOikein2() {
+        assertTrue(pelaaja.voiLiikkuaOikealle(450, 460));
+    }
+    
+    @Test
+    public void voiLiikkuaVasemmalleToimiiOikein2() {
+        assertTrue(pelaaja.voiLiikkuaVasemmalle(30, 20));
     }
 
     @After

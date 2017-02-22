@@ -1,23 +1,27 @@
-
 package fi.mcman.peli.logiikka;
 
 /**
- * 
+ * Luokka kuvaa yhtä "palasta" pelissä. Jokaiseen Tiileen liittyy luokalta Taso
+ * saatu arvo joka kertoo voiko Tiilen päälle liikkua.
+ *
  * @author ljone
- * 
- * Luokka kuvaa yhtä "palasta" pelissä.
- * Jokaiseen Tiileen liittyy luokalta Taso saatu arvo joka kertoo voiko Tiilen päälle liikkua.
  * @see Taso
- * 
  */
-
 public class Tiili {
+
     private int leveys;
     private int korkeus;
     private int alkuX;
     private int alkuY;
     private int arvo;
-    
+
+    /**
+     * Luo uuden Tiilen parametrina saatuun koordinaattiin.
+     *
+     * @param alkuX Tiilen vasen reuna
+     * @param alkuY Tiilen yläreuna
+     * @param arvo Tiileen asetettava arvo
+     */
     public Tiili(int alkuX, int alkuY, int arvo) {
         this.alkuX = alkuX;
         this.alkuY = alkuY;
@@ -33,11 +37,16 @@ public class Tiili {
     public int getAlkuY() {
         return alkuY;
     }
-    
+
+    /**
+     * Asettaa arvon tiilelle (setArvo).
+     *
+     * @param arvo Integer-tyyppinen arvo
+     */
     public void asetaArvo(int arvo) {
         this.arvo = arvo;
     }
-    
+
     public int getArvo() {
         return this.arvo;
     }

@@ -3,17 +3,19 @@ package fi.mcman.peli.logiikka;
 import fi.mcman.peli.kayttoliittyma.Kayttoliittyma;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 import javax.swing.Timer;
 
 /**
- *
- * @author ljone
- *
  * Tämä luokka sisältää suuren osan ohjelman peruslogiikasta ja
  * toiminnallisuudesta.
  *
+ * @author ljone
  */
 public class Peli extends Timer implements ActionListener {
 
@@ -28,7 +30,14 @@ public class Peli extends Timer implements ActionListener {
     private int nalka;
     private Taso taso;
     private int liiku;
+    private boolean aloitettu;
+    private FileWriter kirjoittaja;
+    private Scanner lukija;
 
+    /**
+     * Luo uuden pelin ja samalla siihen uuden tason, pelialustan, pelaajan,
+     * viholliset ja burgerit, sekä alustaa loput luokan Peli muuttujat.
+     */
     public Peli() {
         super(18, null);
         this.taso = new Taso();
@@ -40,10 +49,19 @@ public class Peli extends Timer implements ActionListener {
         this.pisteet = 0;
         this.nalka = 0;
         liiku = 0;
+        aloitettu = false;
 
         addActionListener(this);
         luoViholliset();
         luoBurgerit();
+
+        try {
+            File t = new File("src/main/resources/Highscores.txt");
+            kirjoittaja = new FileWriter(t, true);
+            lukija = new Scanner(t);
+        } catch (Exception e) {
+            System.out.println("Highscoreja ei löydy.");
+        }
 
     }
 
@@ -63,8 +81,24 @@ public class Peli extends Timer implements ActionListener {
         return alusta;
     }
 
+    public Paivitettava getPaivitettava() {
+        return paivitettava;
+    }
+
     public Taso getTaso() {
         return taso;
+    }
+
+    public void aloita() {
+        aloitettu = true;
+    }
+
+    public boolean voittiko() {
+        return voittiko;
+    }
+
+    public boolean onAloitettu() {
+        return aloitettu;
     }
 
     public List<Burgeri> getBurgerit() {
@@ -83,23 +117,23 @@ public class Peli extends Timer implements ActionListener {
         return pisteet;
     }
 
+    public Kayttoliittyma getKl() {
+        return kl;
+    }
+
     /**
-     * Metodi jatkuu() tarkistaa ensin onko pelaaja elossa.
+     * Metodi jatkuu() tarkistaa ensin onko pelaaja elossa. Sitten tarkistetaan
+     * onko pelissä vielä burgereita jäljellä. Lisäksi tarkastetaan ettei nälkä
+     * ole kasvanut liian suureksi.
      *
      * @see Pelaaja#onElossa()
-     *
-     * Sitten tarkistetaan onko pelissä vielä burgereita jäljellä.
      * @see onBurgereita()
-     *
-     * Lisäksi tarkastetaan vielä ettei nälkä ole kasvanut liian suureksi.
      * @see this.nalka
-     *
-     * Jos edellä olevat ehdot menevät läpi peli jatkuu eli palautetaan true.
-     * Jos ensimmäinen ehto menee läpi mutta seuraava ei, asetetaan muuttujan
-     * voittiko arvoksi true ja palautetaan false. Peli ei siis jatku mutta
-     * tiedämme että pelaaja voitti koska oli vielä elossa. Muulloin palautetaan
-     * false (pelaaja häviää).
-     * @return returnit selitetty yllä
+     * @return Jos edellä olevat ehdot menevät läpi peli jatkuu eli palautetaan
+     * true. Jos ensimmäinen ehto menee läpi mutta seuraava ei, asetetaan
+     * muuttujan voittiko arvoksi true ja palautetaan false. Peli ei siis jatku
+     * mutta tiedämme että pelaaja voitti koska oli vielä elossa. Muulloin
+     * palautetaan false (pelaaja häviää).
      */
     public boolean jatkuu() {
         if (this.pelaaja.onElossa()) {
@@ -113,7 +147,6 @@ public class Peli extends Timer implements ActionListener {
             }
         }
         return false;
-
     }
 
     /**
@@ -178,55 +211,128 @@ public class Peli extends Timer implements ActionListener {
     }
 
     /**
-     * Metodi päivittää peliä ajastimen mukaan.
+     * Metodi päivittää peliä ajastimen mukaan. Peliä päivitetään 30
+     * millisekunnin välein. Jos metodi jatkuu() palauttaa false, peli loppuu
+     * (kutsu return). Nalka kasvaa jokaisessa päivityksessä yhdellä (täydet
+     * 1500 kestää siis 27 sekuntia). Tarkistetaan osuuko pelaaja johonkin
+     * burgeriin (jota ei ole vielä syöty). Jos osuu, kasvatetaan pisteitä
+     * yhdellä ja vähennetään nälkää 60:llä. Tarkistetaan osuuko pelaaja
+     * johonkin viholliseen. Jos osuu, pelaaja kuolee (metodi kuolee()) ja peli
+     * loppuu seuraavan päivityksen alussa. Kutsutaan kaikille pelin
+     * vihollisille metodia liiku(). Lopuksi kutsutaan paivitettavalle
+     * (Piirtoalusta luokan olio joka piirtää pelin komponentit) metodia
+     * paivita(), joka piirtaa uuden tilanteen.
      *
      * @param e parametri saadaan perittyjen luokkien Timer ja ActionListener
-     * avulla. Peliä päivitetään 30 millisekunnin välein. Jos metodi jatkuu()
-     * palauttaa false, peli loppuu (kutsu return). Nalka kasvaa 0,03 sekunnin
-     * välein yhdellä (täydet 500 kestää siis 15 sekuntia). Tarkistetaan osuuko
-     * pelaaja johonkin burgeriin (jota ei ole vielä syöty). Jos osuu,
-     * kasvatetaan pisteitä yhdellä ja vähennetään nälkää 50:llä. Tarkistetaan
-     * osuuko pelaaja johonkin viholliseen. Jos osuu, pelaaja kuolee (metodi
-     * kuolee()) ja peli loppuu seuraavan päivityksen alussa. Kutsutaan kaikille
-     * pelin vihollisille metodia liiku().
+     * avulla
      * @see Vihollinen#liiku()
-     * @see jatkuu() Kutsutaan paivitettavalle (Piirtoalusta luokan olio joka
-     * piirtää pelin komponentit) metodia paivita(), joka piirtaa uuden
-     * tilanteen.
-     * @see Paivitettava, kayttoliittyma.Piirtoalusta#paivita()
+     * @see jatkuu()
+     * @see Paivitettava
+     * @see Piirtoalusta#paivita()
+     * @see Pelaaja#kuolee()
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (!jatkuu()) {
-            return;
-        }
-        nalka++;
-        for (Burgeri b : burgerit) {
-            if (pelaaja.osuuBurgeriin(b)) {
-                if (!b.isSyoty()) {
-                    b.setSyoty(true);
-                    pisteet++;
-                    if (pisteet < 0) {
-                        pisteet = 0;
+        if (aloitettu) {
+            if (!jatkuu()) {
+                paivitaHighscoret();
+                try {
+                    long startTime = System.currentTimeMillis();
+                    long elapsedTime = 0L;
+                    while (elapsedTime < 5000) {
+                        elapsedTime = (new Date()).getTime() - startTime;
                     }
-                    nalka -= 60;
-                    if (nalka < 0) {
-                        nalka = 0;
+                    paivitettava.paivita();
+                } catch (Exception ex) {
+                    System.out.println("Viiven asetus ei onnistu.");
+                }
+                stop();
+                return;
+            }
+            nalka++;
+            for (Burgeri b : burgerit) {
+                if (pelaaja.osuuBurgeriin(b)) {
+                    if (!b.isSyoty()) {
+                        b.setSyoty(true);
+                        pisteet++;
+                        nalka -= 60;
+                        if (nalka < 0) {
+                            nalka = 0;
+                        }
                     }
                 }
             }
+            for (Vihollinen v : viholliset) {
+                if (pelaaja.osuuViholliseen(v)) {
+                    pelaaja.kuolee();
+                }
+            }
+            if (liiku == 0) {
+                for (Vihollinen v : this.viholliset) {
+                    v.liiku();
+                }
+            }
+            this.paivitettava.paivita();
         }
-        for (Vihollinen v : viholliset) {
-            if (pelaaja.osuuViholliseen(v)) {
-                pelaaja.kuolee();
+    }
+
+    public void paivitaHighscoret() {
+        int rivit = 1;
+        while (lukija.hasNextLine()) {
+            String rivi = lukija.nextLine();
+            System.out.println(rivi);
+            System.out.println(Integer.parseInt(rivi.substring(4, 5)));
+            if (Integer.parseInt(rivi.substring(3, 4)) <= pisteet || Integer.parseInt(rivi.substring(3, 3)) <= pisteet) {
+                try {
+                    if (pisteet >= 100) {
+                        kirjoittaja.write(rivit + ". " + pisteet + " " + pelaaja.getNimi() + "\n");
+                    } else if (pisteet >= 10) {
+                        kirjoittaja.write(rivit + ". 0" + pisteet + " " + pelaaja.getNimi() + "\n");
+                    } else {
+                        kirjoittaja.write(rivit + ". 00" + pisteet + " " + pelaaja.getNimi() + "\n");
+                    }
+                    kirjoittaja.close();
+                } catch (Exception e) {
+                    System.out.println("Tiedostoa ei löydy.");
+                }
+            }
+            rivit++;
+        }
+        if (!lukija.hasNext()) {
+            if (rivit <= 5) {
+                try {
+                    if (pisteet >= 100) {
+                        kirjoittaja.write(rivit + ". " + pisteet + " " + pelaaja.getNimi() + "\n");
+                    } else if (pisteet >= 10) {
+                        kirjoittaja.write(rivit + ". 0" + pisteet + " " + pelaaja.getNimi() + "\n");
+                    } else {
+                        kirjoittaja.write(rivit + ". 00" + pisteet + " " + pelaaja.getNimi() + "\n");
+                    }
+                    kirjoittaja.close();
+                } catch (Exception e) {
+                    System.out.println("Tiedostoa ei löydy.");
+                }
             }
         }
-        if (liiku == 0) {
-            for (Vihollinen v : this.viholliset) {
-                v.liiku();
+        lukija.reset();
+    }
+
+    public String[] annaHighscoret() {
+        int i = 0;
+        String[] taulukko = new String[5];
+        while (lukija.hasNext()) {
+            if (i >= 5) {
+                break;
             }
+            String s = lukija.nextLine();
+            if (s.isEmpty()) {
+                return taulukko;
+            }
+            taulukko[i] = s;
+            i++;
         }
-        this.paivitettava.paivita();
+        lukija.reset();
+        return taulukko;
     }
 
 }

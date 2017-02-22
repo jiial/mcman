@@ -19,4 +19,6 @@ Päivä | Tunnit | Kuvaus
 14.02.2017 | 1.5h | Vihollisen tekoälyn ja pelaajan liikkumisen järkeilyä
 16.02.2017 | 2.0h | Vihollisen logiikan hiomista, pelaajan liikkumisen ja pelin päivityksen säätämistä
 17.02.2017 | 5.0h | Kenttäsuunnittelu, kuvia, logiikan hiomista
+21.02.2017 | 5.5h | Javadocia, koodin siistimistä, testejä
+22.02.2017 | 4.0h | Aloitusnäyttö, Highscorejen kanssa tappelua...
 ... | ... | ...

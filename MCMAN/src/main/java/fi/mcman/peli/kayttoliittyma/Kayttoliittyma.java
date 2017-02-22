@@ -7,24 +7,32 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
 /**
- * 
+ * Toimii päärunkona graafiselle käyttöliittymälle sekä luo tarvittavat
+ * komponentit ja hoitaa niiden asetukset ja yhteydet kuntoon.
+ *
  * @author ljone
- * 
- * Toimii päärunkona graafiselle käyttöliittymälle.
- * Luo tarvittavat komponentit ja hoitaa niiden asetukset ja yhteydet kuntoon.
- * 
  */
-
 public class Kayttoliittyma implements Runnable {
 
     private Peli peli;
     private Piirtoalusta alusta;
     private JFrame frame;
 
+    /**
+     * Luo uuden Kayttoliittyman.
+     *
+     * @param peli Kayttoliittyma liittyy peliin.
+     */
     public Kayttoliittyma(Peli peli) {
         this.peli = peli;
     }
 
+    /**
+     * Luo JFramen ja liittää siihen tarvittavat komponentit metodilla
+     * luoKomponentit.
+     *
+     * @see luoKomponentit(Container container)
+     */
     @Override
     public void run() {
         frame = new JFrame("MCMAN");
@@ -38,11 +46,17 @@ public class Kayttoliittyma implements Runnable {
         frame.setVisible(true);
     }
 
+    /**
+     * Luo Piirtoalustan ja NappaimistonKuuntelijan ja lisää ne käyttöliittymän
+     * runkoon.
+     *
+     * @param container Kayttoliittyman JFrame
+     */
     public void luoKomponentit(Container container) {
         this.alusta = new Piirtoalusta(peli);
         this.peli.setPaivitettava(alusta);
         container.add(alusta);
-        
+
         frame.addKeyListener(new NappaimistonKuuntelija(this));
 
     }

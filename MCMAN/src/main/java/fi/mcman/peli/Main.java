@@ -5,21 +5,23 @@ import fi.mcman.peli.logiikka.Peli;
 import javax.swing.SwingUtilities;
 
 /**
- * 
- * @author ljone
- * 
  * Alustaa ohjelman pääkomponentit ja käynnistää pelin.
- * 
+ *
+ * @author ljone
  */
-
 public class Main {
 
+    /**
+     * Luo pelin ja käyttöliittymän sekä käynnistää pelin.
+     *
+     * @param args -
+     */
     public static void main(String[] args) {
         Peli peli = new Peli();
-        
+
         Kayttoliittyma liittyma = new Kayttoliittyma(peli);
         SwingUtilities.invokeLater(liittyma);
-        
+
         while (liittyma.getAlusta() == null) {
             try {
                 Thread.sleep(1000);
@@ -30,7 +32,7 @@ public class Main {
 
         peli.setPaivitettava(liittyma.getAlusta());
         peli.start();
-        
+
     }
 
 }

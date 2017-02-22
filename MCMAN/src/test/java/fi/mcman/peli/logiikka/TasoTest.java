@@ -13,59 +13,63 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * Testaa luokan Taso toimintaa.
  *
  * @author ljone
- * 
- * Testaa luokan Taso toimintaa.
- * 
  */
 public class TasoTest {
+
     private Taso taso;
-    
+
     public TasoTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
         taso = new Taso();
     }
-    
+
     @Test
     public void tasonTiiltenArvotOikein() {
         assertEquals(1, taso.palautaArvo(0, 0));
     }
-    
+
     @Test
     public void tasonTiiltenArvotOikein2() {
         assertEquals(3, taso.palautaArvo(24, 24));
     }
-    
+
     @Test
     public void tasonTiiltenArvotOikein3() {
         assertEquals(9, taso.palautaArvo(1, 1));
     }
-    
+
     @Test
     public void tasonTiiltenKoordinaatitOikein() {
         assertEquals(480, taso.palautaTiili(485, 485).getAlkuX());
     }
-    
+
     @Test
     public void tasonTiiltenKoordinaatitOikein2() {
         assertEquals(60, taso.palautaTiili(485, 70).getAlkuY());
     }
-    
+
     @Test
     public void tasonTiiltenKoordinaatitOikein3() {
         assertEquals(9, taso.palautaTiili(298, 300).getArvo());
+    }
+    
+    @Test
+    public void tasoLuodaanOikein() {
+        assertEquals(625, taso.getKENTTA().length);
     }
     
     @After

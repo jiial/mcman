@@ -3,15 +3,13 @@ package fi.mcman.peli.logiikka;
 import java.util.Random;
 
 /**
+ * Luokkassa pelin vihollisten toiminnallisuus. Luokan tärkein ominaisuus on
+ * tekoäly jonka mukaan vihollinen liikkuu. Perii abstraktin luokan Hahmo
  *
  * @author ljone
- *
- * Luokkassa pelin vihollisten toiminnallisuus. Luokan tärkein ominaisuus on
- * tekoäly jonka mukaan vihollinen liikkuu.
- * @see liiku() valitseSuunta() arvoSuunta()
- *
- * Perii abstraktin luokan Hahmo.
- *
+ * @see liiku()
+ * @see valitseSuunta()
+ * @see arvoSuunta()
  */
 public class Vihollinen extends Hahmo {
 
@@ -21,6 +19,14 @@ public class Vihollinen extends Hahmo {
     private int suunnanMuutos;
     private Taso taso;
 
+    /**
+     * Luo uuden vihollisen saamiensa parametrien mukaan ja alustaa muuttujat.
+     *
+     * @param nimi Vihollisen nimi, yksilöi vihollisen
+     * @param x Vihollisen x-koordinaatti alussa
+     * @param y Vihollisen y-koordinaatti alussa
+     * @param peli Parametrina peli johon vihollinen liittyy.
+     */
     public Vihollinen(String nimi, int x, int y, Peli peli) {
         super.nimi = nimi;
         super.x = x;
@@ -34,12 +40,6 @@ public class Vihollinen extends Hahmo {
         this.suurinY = 480;
         this.suunnanMuutos = 0;
         taso = peli.getTaso();
-    }
-
-    @Override
-    public void siirra(int x, int y) {
-        this.x = x;
-        this.y = y;
     }
 
     public void setArpoja(Random arpoja) {
@@ -66,6 +66,18 @@ public class Vihollinen extends Hahmo {
         this.kohde = kohde;
     }
 
+    public void setSuunta(Suunta suunta) {
+        this.suunta = suunta;
+    }
+
+    public void setSuunnanMuutos(int suunnanMuutos) {
+        this.suunnanMuutos = suunnanMuutos;
+    }
+
+    public int getSuunnanMuutos() {
+        return suunnanMuutos;
+    }
+    
     public String getNimi() {
         return nimi;
     }
@@ -78,6 +90,17 @@ public class Vihollinen extends Hahmo {
         return x;
     }
 
+    public Suunta getSuunta() {
+        return suunta;
+    }
+
+    /**
+     * Valitsee ensin suunnan joko arpomalla tai pelaajan mukaan jos riittävän
+     * lähellä pelaajaa. Sitten liikkuu valittuun suuntaan jos mahdollista.
+     *
+     * @see Suunta
+     * @see valitseSuunta()
+     */
     @Override
     public void liiku() {
         valitseSuunta();
@@ -111,6 +134,14 @@ public class Vihollinen extends Hahmo {
         }
     }
 
+    /**
+     * Valitsee suunnan johon vihollinen liikkuu. Hyödyntää useita muita
+     * metodeja päätöksenteossa.
+     *
+     * @see arvoSuunta()
+     * @see valitseSuuntaJosPelaajaTahtaimessa()
+     * @see valitseSuuntaJosPelaajaLahettyvilla()
+     */
     public void valitseSuunta() {
 
         if (kohde.getX() == this.x || kohde.getY() == this.y) {
@@ -155,6 +186,12 @@ public class Vihollinen extends Hahmo {
         }
     }
 
+    /**
+     * Vihollisen suunta valitaan tämän metodin mukaan jos pelaaja on lähellä
+     * vihollista muttei kuitenkaan samassa x- tai y-koordinaatissa.
+     *
+     * @see arvoSuunta()
+     */
     public void valitseSuuntaJosPelaajaLahettyvilla() {
         if (kohde.getX() - this.x <= 180 && kohde.getX() - this.x > 0) {
             this.suunta = Suunta.OIKEA;
@@ -181,6 +218,12 @@ public class Vihollinen extends Hahmo {
         }
     }
 
+    /**
+     * Vihollisen suunta valitaan tämän metodin perusteella jos vihollisen ja
+     * pelaajan x- tai y-koordinaatti on sama.
+     *
+     * @see arvoSuunta()
+     */
     public void valitseSuuntaJosPelaajaTahtaimessa() {
         if (kohde.getX() == this.x) {
             if (kohde.getY() - this.y <= 100 && kohde.getY() - this.y > 0) {
@@ -238,6 +281,10 @@ public class Vihollinen extends Hahmo {
 //        return false;
 //
 //    }
+    /**
+     * Arpoo suunnan viholliselle. Arvontoja suoritetaan niin kauan kunnes
+     * löydetään suunta johon voi liikkua.
+     */
     public void arvoSuunta() {
         while (true) {
             int luku = this.arpoja.nextInt(4);
@@ -263,6 +310,11 @@ public class Vihollinen extends Hahmo {
         }
     }
 
+    /**
+     * Tarkastaa voiko vihollinen liikkua senhetkiseen suuntaansa.
+     *
+     * @return true jos voi, false jos ei
+     */
     public boolean voiLiikkua() {
         if (this.suunta == suunta.VASEN) {
             if (taso.palautaTiili(x - 1, y).getArvo() == 9) {
@@ -292,6 +344,14 @@ public class Vihollinen extends Hahmo {
         return false;
     }
 
+    /**
+     * Tarkastaa, voiko suuntaa vaihtaa alas tai ylös. Tarkoituksena saada
+     * vihollinen kääntyilemään useammin ja näin liikkumaan kattavammin ja
+     * epäsäännöllisemmin pitkin pelialuetta. Hyödyntää metodia voiLiikkua().
+     *
+     * @return true jos voi, false jos ei
+     * @see voiLiikkua()
+     */
     public boolean voiMuuttaaAlasTaiYlos() {
         suunta = suunta.ALAS;
         if (voiLiikkua()) {
@@ -300,16 +360,38 @@ public class Vihollinen extends Hahmo {
         suunta = suunta.YLOS;
         if (voiLiikkua()) {
             return true;
+            /**
+             * Tarkastaa, voiko suuntaa vaihtaa alas tai ylös. Tarkoituksena
+             * saada vihollinen kääntyilemään useammin ja näin liikkumaan
+             * kattavammin ja epäsäännöllisemmin pitkin pelialuetta
+             *
+             * @return true jos voi, false jos ei
+             */
         }
         return false;
     }
 
+    /**
+     * Tarkastaa, voiko suuntaa vaihtaa vasemmalle tai oikealle. Tarkoituksena
+     * saada vihollinen kääntyilemään useammin ja näin liikkumaan kattavammin ja
+     * epäsäännöllisemmin pitkin pelialuetta. Hyödyntää metodia voiLiikkua().
+     *
+     * @return true jos voi, false jos ei
+     * @see voiLiikkua()
+     */
     public boolean voiMuuttaaVasemmalleTaiOikealle() {
         suunta = suunta.OIKEA;
         if (voiLiikkua()) {
             return true;
         }
         suunta = suunta.VASEN;
+        /**
+         * Tarkastaa, voiko suuntaa vaihtaa alas tai ylös. Tarkoituksena saada
+         * vihollinen kääntyilemään useammin ja näin liikkumaan kattavammin ja
+         * epäsäännöllisemmin pitkin pelialuetta
+         *
+         * @return true jos voi, false jos ei
+         */
         if (voiLiikkua()) {
             return true;
         }
