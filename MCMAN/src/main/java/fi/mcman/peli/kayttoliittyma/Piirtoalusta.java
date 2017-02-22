@@ -57,10 +57,10 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (!peli.jatkuu()) {
-            pisteet.setVisible(false);
-            tulostaHighscoret(g);
-        } else {
+//        if (!peli.jatkuu()) {
+//            pisteet.setVisible(false);
+//            tulostaHighscoret(g);
+//        } else {
             if (peli.onAloitettu()) {
                 try {
                     BufferedImage kuva = ImageIO.read(getClass().getResourceAsStream("/bg3.png"));
@@ -83,7 +83,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
             } else {
                 piirraAlkunaytto(g);
             }
-        }
+//        }
     }
 
     /**
