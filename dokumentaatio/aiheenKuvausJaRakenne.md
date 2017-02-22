@@ -20,7 +20,5 @@
 ![Luokkakaavio][id]
 
 [id]: https://github.com/jiial/mcman/blob/master/dokumentaatio/pelaajaaloittaapelin.png
-![Sekvenssikaavio 1][id]
 
 [id]: https://github.com/jiial/mcman/blob/master/dokumentaatio/pelaajaliikkuu.png
-![Sekvenssikaavio 2][id]
