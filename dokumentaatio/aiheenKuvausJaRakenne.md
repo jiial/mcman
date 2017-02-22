@@ -16,9 +16,11 @@
 
 
 
-[id]: https://github.com/jiial/mcman/blob/master/dokumentaatio/luokkakaavio.png
-![Luokkakaavio][id]
+[id1]: https://github.com/jiial/mcman/blob/master/dokumentaatio/luokkakaavio.png
+![Luokkakaavio][id1]
 
-[id]: https://github.com/jiial/mcman/blob/master/dokumentaatio/pelaajaaloittaapelin.png
+[id2]: https://github.com/jiial/mcman/blob/master/dokumentaatio/pelaajaaloittaapelin.png
+![Sekvenssikaavio 1][id2]
 
-[id]: https://github.com/jiial/mcman/blob/master/dokumentaatio/pelaajaliikkuu.png
+[id3]: https://github.com/jiial/mcman/blob/master/dokumentaatio/pelaajaliikkuu.png
+![Sekvenssikaavio 2][id3]
