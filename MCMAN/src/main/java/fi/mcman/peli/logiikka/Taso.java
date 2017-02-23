@@ -13,6 +13,10 @@ public final class Taso {
 
     private Tiili[][] tiilet;
 
+    /**
+     * Taulukko sisältää tasoon liittyvän datan, jossa arvo kertoo minkälaisesta
+     * tiilestä on kyse.
+     */
     public static final int[] KENTTA = new int[]{
         1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 2,
         8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 6,

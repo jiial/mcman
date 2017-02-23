@@ -8,8 +8,17 @@ package fi.mcman.peli.logiikka;
  */
 public class Burgeri {
 
+    /**
+     * x-koordinaatti.
+     */
     private int x;
+    /**
+     * y-koordinaatti.
+     */
     private int y;
+    /**
+     * Boolean joka kertoo onko burgeri jo syöty.
+     */
     private boolean syoty;
 
     /**

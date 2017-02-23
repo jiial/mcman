@@ -9,9 +9,21 @@ package fi.mcman.peli.logiikka;
  */
 public abstract class Hahmo {
 
+    /**
+     * Hahmon nimi.
+     */
     protected String nimi;
+    /**
+     * Hahmolla on x- ja y-koordinaatit.
+     */
     protected int x, y;
+    /**
+     * Hahmolla on aina jokin suunta.
+     */
     protected Suunta suunta;
+    /**
+     * Hahmo liittyy Peliin.
+     */
     protected Peli peli;
 
     /**

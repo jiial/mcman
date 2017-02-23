@@ -9,10 +9,25 @@ package fi.mcman.peli.logiikka;
  */
 public class Tiili {
 
+    /**
+     * Tiilen leveys.
+     */
     private int leveys;
+    /**
+     * Tiilen korkeus.
+     */
     private int korkeus;
+    /**
+     * Tiilen vasen reuna.
+     */
     private int alkuX;
+    /**
+     * Tiilen yläreuna.
+     */
     private int alkuY;
+    /**
+     * Tiili saa arvon Tasolta.
+     */
     private int arvo;
 
     /**

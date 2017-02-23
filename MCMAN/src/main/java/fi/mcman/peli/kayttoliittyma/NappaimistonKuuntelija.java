@@ -14,8 +14,17 @@ import java.awt.event.KeyListener;
  */
 public class NappaimistonKuuntelija implements KeyListener {
 
+    /**
+     * Käyttöliittyma johon näppäimistönkuuntelija liittyy.
+     */
     private Kayttoliittyma kl;
+    /**
+     * Pelaajalle annetaan suunta näppäinten painallusten perusteella.
+     */
     private Pelaaja pelaaja;
+    /**
+     * Näppäimistönkuuntelija liittyy Peliin.
+     */
     private Peli peli;
 
     /**
@@ -64,19 +73,16 @@ public class NappaimistonKuuntelija implements KeyListener {
                 if (pelaaja.voiLiikkuaAlas(pelaaja.getX(), pelaaja.getY())) {
                     pelaaja.setSuunta(Suunta.ALAS);
                 }
-//            } else if  (pelaaja.voiLiikkuaAlas(pelaaja.getX() + 1, pelaaja.getY())) {
-//                pelaaja.setVaihdaAlas(1);
-//            } else if  (pelaaja.voiLiikkuaAlas(pelaaja.getX() - 1, pelaaja.getY())) {
-//                pelaaja.setVaihdaAlas(1);
-//            } else if  (pelaaja.voiLiikkuaAlas(pelaaja.getX() + 2, pelaaja.getY())) {
-//                pelaaja.setVaihdaAlas(1);
-//            } else if  (pelaaja.voiLiikkuaAlas(pelaaja.getX() - 2, pelaaja.getY())) {
-//                pelaaja.setVaihdaAlas(1);
-//            }
                 pelaaja.liiku();
             }
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+//                int tekstinPituus = peli.getKl().getAlusta().getNimikentta().getText().length();
+//                if (tekstinPituus > 0 && tekstinPituus < 13) {
+//                    pelaaja.setNimi(peli.getKl().getAlusta().getNimikentta().getText());
                 peli.aloita();
+//                } else {
+//                    peli.getKl().getAlusta();
+//                }
             }
         }
     }

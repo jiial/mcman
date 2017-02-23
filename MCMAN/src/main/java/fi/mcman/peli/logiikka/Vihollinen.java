@@ -12,11 +12,26 @@ import java.util.Random;
  * @see arvoSuunta()
  */
 public class Vihollinen extends Hahmo {
-
+    
+    /**
+     * Asettavat rajat vihollisen liikkumiselle.
+     */
     private int pieninX, suurinX, pieninY, suurinY;
+    /**
+     * Vihollisella on kohteena pelaaja.
+     */
     private Pelaaja kohde;
+    /**
+     * Arpoo lukuja joiden perusteella vihollinen valitsee suunnan.
+     */
     private Random arpoja;
+    /**
+     * Määrittää kuinka pitkään vihollinen liikkuu valittuun suuntaan.
+     */
     private int suunnanMuutos;
+    /**
+     * Tason avulla tarkistetaan voidaanko valittuun suuntaan liikkua.
+     */
     private Taso taso;
 
     /**
@@ -274,13 +289,6 @@ public class Vihollinen extends Hahmo {
         }
     }
 
-//    public boolean onTahtaimessa(int a, int b) {
-//        if (a - b > -5 && a - b < 5) {
-//            return true;
-//        }
-//        return false;
-//
-//    }
     /**
      * Arpoo suunnan viholliselle. Arvontoja suoritetaan niin kauan kunnes
      * löydetään suunta johon voi liikkua.
@@ -360,13 +368,6 @@ public class Vihollinen extends Hahmo {
         suunta = suunta.YLOS;
         if (voiLiikkua()) {
             return true;
-            /**
-             * Tarkastaa, voiko suuntaa vaihtaa alas tai ylös. Tarkoituksena
-             * saada vihollinen kääntyilemään useammin ja näin liikkumaan
-             * kattavammin ja epäsäännöllisemmin pitkin pelialuetta
-             *
-             * @return true jos voi, false jos ei
-             */
         }
         return false;
     }
@@ -385,13 +386,6 @@ public class Vihollinen extends Hahmo {
             return true;
         }
         suunta = suunta.VASEN;
-        /**
-         * Tarkastaa, voiko suuntaa vaihtaa alas tai ylös. Tarkoituksena saada
-         * vihollinen kääntyilemään useammin ja näin liikkumaan kattavammin ja
-         * epäsäännöllisemmin pitkin pelialuetta
-         *
-         * @return true jos voi, false jos ei
-         */
         if (voiLiikkua()) {
             return true;
         }

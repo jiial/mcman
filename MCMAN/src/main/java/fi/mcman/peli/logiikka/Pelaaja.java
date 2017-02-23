@@ -9,7 +9,14 @@ package fi.mcman.peli.logiikka;
  */
 public class Pelaaja extends Hahmo {
 
+    /**
+     * Kertoo onko pelaaja elossa.
+     */
     private boolean elossa;
+    /**
+     * Pelaajalla on Taso, joka määrää, voiko pelaaja liikkua tiettyyn
+     * suuntaan.
+     */
     private Taso taso;
 
     /**

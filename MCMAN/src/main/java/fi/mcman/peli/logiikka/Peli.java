@@ -19,19 +19,58 @@ import javax.swing.Timer;
  */
 public class Peli extends Timer implements ActionListener {
 
+    /**
+     * Peli tallentaa burgerit listaan.
+     */
     private List<Burgeri> burgerit;
+    /**
+     * Peli tallentaa viholliset listaan.
+     */
     private List<Vihollinen> viholliset;
+    /**
+     * Pelillä on aina yksi pelaaja.
+     */
     private Pelaaja pelaaja;
+    /**
+     * Pelialusta määrittää pelialueen koon.
+     */
     private Pelialusta alusta;
+    /**
+     * Kertoo voittiko pelaaja pelin eli keräsikö kaikki pisteet.
+     */
     private boolean voittiko;
+    /**
+     * Peli päivittää Paivitettavaa 18 millisekunnin välein.
+     */
     private Paivitettava paivitettava;
+    /**
+     * Peliin liittyvä käyttöliittymä.
+     */
     private Kayttoliittyma kl;
+    /**
+     * Muuttuja pitää kirjaa syötyjen burgereiden määrästä.
+     */
     private int pisteet;
+    /**
+     * Peli kasvattaa pelaajan nälkää joka päivityskerralla yhdellä. Burgerin
+     * syöminen vähentää nälkää.
+     */
     private int nalka;
+    /**
+     * Peliin liittyy Taso, jossa kentän oleellinen data.
+     */
     private Taso taso;
-    private int liiku;
+    /**
+     * Kertoo onko peli aloitettu (vai ollaanko vielä aloitusvalikossa).
+     */
     private boolean aloitettu;
+    /**
+     * Kirjoittaa Highscoret ylös Highscores.txt-tekstitiedostoon.
+     */
     private FileWriter kirjoittaja;
+    /**
+     * Lukee Highscoreja.
+     */
     private Scanner lukija;
 
     /**
@@ -48,7 +87,6 @@ public class Peli extends Timer implements ActionListener {
         this.voittiko = false;
         this.pisteet = 0;
         this.nalka = 0;
-        liiku = 0;
         aloitettu = false;
 
         addActionListener(this);
@@ -210,6 +248,9 @@ public class Peli extends Timer implements ActionListener {
         return nalka;
     }
 
+//    public int getPaivitaKertaalleen() {
+//        return paivitaKertaalleen;
+//    }
     /**
      * Metodi päivittää peliä ajastimen mukaan. Peliä päivitetään 30
      * millisekunnin välein. Jos metodi jatkuu() palauttaa false, peli loppuu
@@ -239,7 +280,7 @@ public class Peli extends Timer implements ActionListener {
                 try {
                     long startTime = System.currentTimeMillis();
                     long elapsedTime = 0L;
-                    while (elapsedTime < 5000) {
+                    while (elapsedTime < 1500) {
                         elapsedTime = (new Date()).getTime() - startTime;
                     }
                     paivitettava.paivita();
@@ -267,72 +308,108 @@ public class Peli extends Timer implements ActionListener {
                     pelaaja.kuolee();
                 }
             }
-            if (liiku == 0) {
-                for (Vihollinen v : this.viholliset) {
-                    v.liiku();
-                }
+            for (Vihollinen v : this.viholliset) {
+                v.liiku();
             }
-            this.paivitettava.paivita();
+
+            if (jatkuu()) {
+                this.paivitettava.paivita();
+            }
         }
     }
 
+    /**
+     * Päivittää pelin tuloksen Highscores-tiedostoon.
+     */
     public void paivitaHighscoret() {
-        int rivit = 1;
-        while (lukija.hasNextLine()) {
-            String rivi = lukija.nextLine();
-            System.out.println(rivi);
-            System.out.println(Integer.parseInt(rivi.substring(4, 5)));
-            if (Integer.parseInt(rivi.substring(3, 4)) <= pisteet || Integer.parseInt(rivi.substring(3, 3)) <= pisteet) {
-                try {
-                    if (pisteet >= 100) {
-                        kirjoittaja.write(rivit + ". " + pisteet + " " + pelaaja.getNimi() + "\n");
-                    } else if (pisteet >= 10) {
-                        kirjoittaja.write(rivit + ". 0" + pisteet + " " + pelaaja.getNimi() + "\n");
-                    } else {
-                        kirjoittaja.write(rivit + ". 00" + pisteet + " " + pelaaja.getNimi() + "\n");
+        if (!lukija.hasNextLine()) {
+            kirjoitaTiedostoon();
+        } else {
+            while (lukija.hasNextLine()) {
+                String rivi = lukija.nextLine();
+                if (rivi != null) {
+                    System.out.println(rivi);
+                    if (onkoPisteetSuuremmat(rivi)) {
+                        kirjoitaTiedostoon();
+                        break;
                     }
-                    kirjoittaja.close();
-                } catch (Exception e) {
-                    System.out.println("Tiedostoa ei löydy.");
-                }
-            }
-            rivit++;
-        }
-        if (!lukija.hasNext()) {
-            if (rivit <= 5) {
-                try {
-                    if (pisteet >= 100) {
-                        kirjoittaja.write(rivit + ". " + pisteet + " " + pelaaja.getNimi() + "\n");
-                    } else if (pisteet >= 10) {
-                        kirjoittaja.write(rivit + ". 0" + pisteet + " " + pelaaja.getNimi() + "\n");
-                    } else {
-                        kirjoittaja.write(rivit + ". 00" + pisteet + " " + pelaaja.getNimi() + "\n");
-                    }
-                    kirjoittaja.close();
-                } catch (Exception e) {
-                    System.out.println("Tiedostoa ei löydy.");
                 }
             }
         }
-        lukija.reset();
+        try {
+            kirjoittaja.close();
+        } catch (Exception e) {
+            System.out.println("Kirjoittajan sulkemisessa virhe.");
+        }
     }
 
-    public String[] annaHighscoret() {
+    /**
+     * Hakee viisi parhainta tulosta Highscoreista.
+     *
+     * @return palauttaa viisi parasta tulosta ArrayListina.
+     */
+    public ArrayList<String> annaHighscoret() {
         int i = 0;
-        String[] taulukko = new String[5];
-        while (lukija.hasNext()) {
-            if (i >= 5) {
-                break;
-            }
+        String[] taulukko = new String[1000];
+        while (lukija.hasNextLine()) {
             String s = lukija.nextLine();
-            if (s.isEmpty()) {
-                return taulukko;
-            }
             taulukko[i] = s;
             i++;
         }
-        lukija.reset();
-        return taulukko;
+        ArrayList<String> palautettava = new ArrayList<>();
+        ArrayList<Integer> lista = new ArrayList<>();
+        String nimi = "";
+        for (int j = 0; j < 5; j++) {
+            int suurin = 0;
+            for (int k = 0; k < taulukko.length; k++) {
+                if (taulukko[k] == null) {
+                    continue;
+                }
+                System.out.println(taulukko[k]);
+                int arvo = Integer.parseInt(taulukko[k].substring(0, 3));
+                System.out.println(arvo);
+                if (arvo > suurin) {
+                    if (!lista.contains(k)) {
+                        lista.add(k);
+                        suurin = arvo;
+                        nimi = taulukko[k].substring(4);
+                    }
+                }
+            }
+            palautettava.add(suurin + " " + nimi);
+        }
+        return palautettava;
+    }
+
+    /**
+     * Katsoo onko pisteet suuremmat kuin luetulla rivillä.
+     *
+     * @param rivi Lukijan lukema rivi Highscoreista
+     * @return palauttaa true jos on, false jos ei
+     */
+    public boolean onkoPisteetSuuremmat(String rivi) {
+        if (Integer.parseInt(rivi.substring(0, 3)) < pisteet) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Kirjoittaa uuden Highscore-tuloksen tiedostoon.
+     */
+    public void kirjoitaTiedostoon() {
+        try {
+            if (pisteet >= 100) {
+                kirjoittaja.write(pisteet + " " + pelaaja.getNimi() + "\n");
+            } else if (pisteet >= 10) {
+                kirjoittaja.write("0" + pisteet + " " + pelaaja.getNimi() + "\n");
+            } else {
+                kirjoittaja.write("00" + pisteet + " " + pelaaja.getNimi() + "\n");
+            }
+        } catch (Exception e) {
+            System.out.println("Tiedostoon kirjoittaminen ei onnistunut.");
+            e.printStackTrace();
+        }
     }
 
 }

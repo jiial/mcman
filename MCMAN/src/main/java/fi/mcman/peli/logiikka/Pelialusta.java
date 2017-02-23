@@ -7,7 +7,13 @@ package fi.mcman.peli.logiikka;
  */
 public class Pelialusta {
 
+    /**
+     * Pelialueen leveys.
+     */
     private int leveys;
+    /**
+     * Pelialueen korkeus.
+     */
     private int korkeus;
 
     /**

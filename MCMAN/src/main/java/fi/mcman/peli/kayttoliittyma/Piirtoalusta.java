@@ -14,7 +14,9 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.image.*;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.JTextField;
 
 /**
  * Luokka hoitaa kaikkien komponenttien piirtämisen ruudulle.
@@ -23,12 +25,26 @@ import javax.imageio.ImageIO;
  */
 public class Piirtoalusta extends JPanel implements Paivitettava {
 
+    /**
+     * Piirtoalustaan liittyvä Peli.
+     */
     private Peli peli;
+    /**
+     * Piirtoalusta tuntee Pelaajan voidakseen piirtää sen.
+     */
     private Pelaaja pelaaja;
+    /**
+     * Piirtoalusta tuntee Viholliset voidakseen piirtää ne.
+     */
     private List<Vihollinen> viholliset;
+    /**
+     * JLabel jossa näkyy pisteet.
+     */
     private JLabel pisteet;
-    private Taso taso;
-    private boolean onTaso;
+    /**
+     * JTextField johon syötetään nimi ennen pelin alkua.
+     */
+    private JTextField nimikentta;
 
     /**
      * Luo uuden Piirtoalustan.
@@ -37,11 +53,10 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
      */
     public Piirtoalusta(Peli peli) {
         this.peli = peli;
-        onTaso = false;
-        this.taso = peli.getTaso();
         this.pelaaja = peli.getPelaaja();
         this.viholliset = peli.getViholliset();
         this.pisteet = new JLabel();
+        this.nimikentta = new JTextField();
         pisteet.setForeground(Color.WHITE);
         add(pisteet);
         super.setBackground(Color.BLACK);
@@ -57,11 +72,14 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-//        if (!peli.jatkuu()) {
-//            pisteet.setVisible(false);
-//            tulostaHighscoret(g);
-//        } else {
+        if (!peli.jatkuu()) {
+            pisteet.setVisible(false);
+            tulostaHighscoret(g);
+        } else {
             if (peli.onAloitettu()) {
+                nimikentta.setEnabled(false);
+                nimikentta.setVisible(false);
+                remove(nimikentta);
                 try {
                     BufferedImage kuva = ImageIO.read(getClass().getResourceAsStream("/bg3.png"));
                     g.drawImage(kuva, 0, 0, null);
@@ -83,7 +101,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
             } else {
                 piirraAlkunaytto(g);
             }
-//        }
+        }
     }
 
     /**
@@ -125,8 +143,6 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        g.setColor(Color.YELLOW);
-//        g.fillOval(pelaaja.getX(), pelaaja.getY(), 20, 20);
     }
 
     /**
@@ -157,13 +173,6 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        g.setColor(Color.orange);
-//        for (Burgeri b : peli.getBurgerit()) {
-//            if (!b.isSyoty()) {
-//                g.fillOval(b.getX() + 5, b.getY() + 5, 10, 10);
-//            }
-//
-//        }
     }
 
     /**
@@ -221,25 +230,59 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         g.drawString("VOITIT PELIN!", 150, 310);
     }
 
+    /**
+     * Piirtää alkunäytön/valikon ennen varsinaisen pelin alkua.
+     *
+     * @param g -
+     */
     public void piirraAlkunaytto(Graphics g) {
-        Font ripFontti = new Font("Arial", Font.PLAIN, 50);
-        g.setFont(ripFontti);
-        g.drawString("Paina ENTER", 120, 250);
-        g.drawString("aloittaaksesi pelin", 65, 310);
+        try {
+            BufferedImage kuva = ImageIO.read(getClass().getResourceAsStream("/mcman.png"));
+            g.drawImage(kuva, 0, 0, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Font f = new Font("Arial", Font.PLAIN, 50);
+        g.setFont(f);
+//        g.drawString("Anna nimesi:", 90, 150);
+        g.drawString("Paina ENTER", 90, 480);
+        g.drawString("aloittaaksesi pelin", 20, 530);
+        nimikentta.setBounds(90, 200, 320, 60);
+        nimikentta.setBackground(Color.BLACK);
+        nimikentta.setFont(f);
+//        nimikentta.addKeyListener(peli.getKl().getK());
+//        add(nimikentta);
     }
 
+    /**
+     * Tulostaa Highscoret ruudulle pelin päätyttyä.
+     *
+     * @param g -
+     */
     public void tulostaHighscoret(Graphics g) {
-        String[] t = peli.annaHighscoret();
-        Font ripFontti = new Font("Arial", Font.PLAIN, 28);
-        g.setFont(ripFontti);
+        ArrayList<String> t = peli.annaHighscoret();
+        Font f = new Font("Arial", Font.PLAIN, 28);
+        g.setFont(f);
         g.setColor(Color.WHITE);
-        int x = 220;
-        int y = 100;
+        int x = 170;
+        int y = 120;
         for (String s : t) {
             if (s != null) {
+                System.out.println(s);
                 g.drawString(s, x, y);
             }
             y += 50;
         }
+    }
+
+    public JTextField getNimikentta() {
+        return this.nimikentta;
+    }
+
+    /**
+     * Ilmoittaa jos annettu nimi ei kelpaa.
+     */
+    public void nimiEiKelpaa() {
+
     }
 }

@@ -4,6 +4,8 @@ import fi.mcman.peli.logiikka.Peli;
 import java.awt.Container;
 import java.awt.Dimension;
 import javax.swing.JFrame;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 /**
@@ -14,10 +16,23 @@ import javax.swing.WindowConstants;
  */
 public class Kayttoliittyma implements Runnable {
 
+    /**
+     * Peli johon käyttöliittyma liittyy.
+     */
     private Peli peli;
+    /**
+     * Piirtoalusta joka piirtää käyttöliittymän komponentit.
+     */
     private Piirtoalusta alusta;
+    /**
+     * Pelin frame.
+     */
     private JFrame frame;
-
+    /**
+     * Kuuntelee näppäimistöä.
+     */
+    private NappaimistonKuuntelija k;
+    
     /**
      * Luo uuden Kayttoliittyman.
      *
@@ -36,7 +51,7 @@ public class Kayttoliittyma implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("MCMAN");
-        frame.setPreferredSize(new Dimension(600, 600));
+        frame.setPreferredSize(new Dimension(511, 600));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,15 +71,18 @@ public class Kayttoliittyma implements Runnable {
         this.alusta = new Piirtoalusta(peli);
         this.peli.setPaivitettava(alusta);
         container.add(alusta);
-
-        frame.addKeyListener(new NappaimistonKuuntelija(this));
-
+        this.k = new NappaimistonKuuntelija(this);
+        frame.addKeyListener(k);
     }
 
     public JFrame getFrame() {
         return frame;
     }
 
+    public NappaimistonKuuntelija getK() {
+        return k;
+    }
+    
     public Piirtoalusta getAlusta() {
         return alusta;
     }

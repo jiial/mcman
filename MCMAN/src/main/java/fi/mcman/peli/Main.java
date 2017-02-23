@@ -18,8 +18,8 @@ public class Main {
      */
     public static void main(String[] args) {
         Peli peli = new Peli();
-
         Kayttoliittyma liittyma = new Kayttoliittyma(peli);
+        peli.setKl(liittyma);
         SwingUtilities.invokeLater(liittyma);
 
         while (liittyma.getAlusta() == null) {
