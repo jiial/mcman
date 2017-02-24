@@ -46,17 +46,17 @@ public class VihollinenTest {
     public void palauttaaXoikein() {
         assertEquals(340, vihu.getX());
     }
-    
+
     @Test
     public void palauttaaYoikein() {
         assertEquals(378, vihu.getY());
     }
-    
+
     @Test
     public void nimiPalautetaanOikein() {
         assertEquals("jorma", vihu.getNimi());
     }
-    
+
     @Test
     public void vihuLoytaaPelaajan() {
         vihu.liiku();
@@ -115,42 +115,66 @@ public class VihollinenTest {
         vihu.liiku();
         assertEquals(308, vihu.getY());
     }
-    
+
     @Test
     public void eiLiikuSeinanLapi() {
         vihu.siirra(20, 20);
         vihu.setSuunta(Suunta.VASEN);
         assertFalse(vihu.voiLiikkua());
     }
+
+    @Test
+    public void vihuLiikkuuOikein() {
+        vihu.siirra(340, 380);
+        kohde.siirra(320, 380);
+        vihu.liiku();
+        assertEquals(339, vihu.getX());
+    }
+
+    @Test
+    public void vihuLiikkuuOikein2() {
+        vihu.siirra(340, 380);
+        kohde.siirra(340, 360);
+        vihu.liiku();
+        assertEquals(379, vihu.getY());
+    }
     
+    @Test
+    public void vihuLiikkuuOikein3() {
+        vihu.siirra(340, 360);
+        kohde.siirra(380, 360);
+        vihu.liiku();
+        assertEquals(340, vihu.getX());
+    }
+
     @Test
     public void eiLiikuSeinanLapi2() {
         vihu.siirra(460, 460);
         vihu.setSuunta(Suunta.OIKEA);
         assertFalse(vihu.voiLiikkua());
     }
-    
+
     @Test
     public void eiLiikuSeinanLapi3() {
         vihu.siirra(20, 20);
         vihu.setSuunta(Suunta.YLOS);
         assertFalse(vihu.voiLiikkua());
     }
-    
+
     @Test
     public void voiLiikkuaJosEiEsteita() {
         vihu.siirra(20, 20);
         vihu.setSuunta(Suunta.ALAS);
         assertTrue(vihu.voiLiikkua());
     }
-    
+
     @Test
     public void voiLiikkuaJosEiEsteita2() {
         vihu.siirra(460, 20);
         vihu.setSuunta(Suunta.VASEN);
         assertTrue(vihu.voiLiikkua());
     }
-    
+
     @Test
     public void suunnanMuutosToimii() {
         vihu.setSuunta(Suunta.YLOS);
@@ -159,7 +183,7 @@ public class VihollinenTest {
         vihu.liiku();
         assertEquals(376, vihu.getY());
     }
-    
+
     @Test
     public void suunnanMuutosToimii2() {
         vihu.siirra(440, 20);
@@ -169,7 +193,7 @@ public class VihollinenTest {
         vihu.liiku();
         assertEquals(438, vihu.getX());
     }
-    
+
     @Test
     public void josSuuntaaEiVoiMuuttaaNiinEiMuuteta() {
         vihu.siirra(40, 20);
@@ -177,7 +201,7 @@ public class VihollinenTest {
         vihu.valitseSuunta();
         assertEquals(Suunta.OIKEA, vihu.getSuunta());
     }
-    
+
     @Test
     public void josSuuntaaEiVoiMuuttaaNiinEiMuuteta2() {
         vihu.siirra(20, 80);
@@ -191,21 +215,21 @@ public class VihollinenTest {
         vihu.valitseSuunta();
         assertEquals(Suunta.ALAS, vihu.getSuunta());
     }
-    
+
     @Test
     public void valitseeSuunnanOikeinJosPelaajaTahtaimessa2() {
         vihu.siirra(330, 380);
         vihu.valitseSuunta();
         assertEquals(Suunta.OIKEA, vihu.getSuunta());
     }
-    
+
     @Test
     public void valitseeSuunnanOikeinJosPelaajaLahettyvilla() {
         vihu.siirra(300, 340);
         vihu.valitseSuuntaJosPelaajaLahettyvilla();
         assertEquals(Suunta.OIKEA, vihu.getSuunta());
     }
-    
+
     @Test
     public void valitseeSuunnanOikeinJosPelaajaLahettyvilla2() {
         kohde.siirra(220, 60);
@@ -213,31 +237,69 @@ public class VihollinenTest {
         vihu.valitseSuuntaJosPelaajaLahettyvilla();
         assertEquals(Suunta.YLOS, vihu.getSuunta());
     }
-    
+
     @Test
     public void voiMuuttaaAlasTaiYlosToimii() {
         vihu.siirra(20, 40);
         assertTrue(vihu.voiMuuttaaAlasTaiYlos());
     }
-    
+
     @Test
     public void voiMuuttaaAlasTaiYlosToimii2() {
         vihu.siirra(440, 460);
         assertFalse(vihu.voiMuuttaaAlasTaiYlos());
     }
-    
+
     @Test
     public void voiMuuttaaVasemmalleTaiOikealleToimii() {
         vihu.siirra(20, 40);
         assertFalse(vihu.voiMuuttaaVasemmalleTaiOikealle());
     }
-    
+
     @Test
     public void voiMuuttaaVasemmalleTaiOikealleToimii2() {
         vihu.siirra(460, 460);
         assertTrue(vihu.voiMuuttaaVasemmalleTaiOikealle());
     }
     
+    @Test
+    public void voiLiikkuaToimii() {
+        vihu.siirra(340, 379);
+        vihu.setSuunta(Suunta.ALAS);
+        assertTrue(vihu.voiLiikkua());
+    }
+    
+    @Test
+    public void voiLiikkuaToimii2() {
+        vihu.siirra(340, 380);
+        vihu.setSuunta(Suunta.ALAS);
+        assertFalse(vihu.voiLiikkua());
+    }
+    
+    @Test
+    public void vihuValitseeSuunnanOikeinJosPelaajaTahtaimessa() {
+        vihu.siirra(340, 360);
+        kohde.siirra(380, 360);
+        vihu.liiku();
+        assertEquals(361, vihu.getY());
+    }
+    
+    @Test
+    public void vihuValitseeSuunnanOikeinJosPelaajaTahtaimessa2() {
+        vihu.siirra(20, 80);
+        kohde.siirra(60, 80);
+        vihu.liiku();
+        assertEquals(81, vihu.getY());
+    }
+    
+    @Test
+    public void vihuValitseeSuunnanOikeinJosPelaajaTahtaimessa3() {
+        vihu.siirra(80, 20);
+        kohde.siirra(80, 60);
+        vihu.liiku();
+        assertEquals(81, vihu.getX());
+    }
+
     @After
     public void tearDown() {
     }

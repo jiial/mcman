@@ -73,6 +73,7 @@ public class Kayttoliittyma implements Runnable {
         container.add(alusta);
         this.k = new NappaimistonKuuntelija(this);
         frame.addKeyListener(k);
+        frame.setFocusable(true);
     }
 
     public JFrame getFrame() {

@@ -205,7 +205,47 @@ public class PeliTest {
         peli.setNalka(1400);
         assertTrue(peli.jatkuu());
     }
+    
+    @Test
+    public void peliPaivittaaHighscoretOikein() {
+        peli.setPisteet(200);
+        peli.paivitaHighscoret();
+        assertEquals(200, peli.annaHighscoret().get(0).getPisteet());
+    }
 
+    @Test
+    public void peliAntaaHighscoretOikein() {
+        assertEquals(5, peli.annaHighscoret().size());
+    }
+    
+    @Test
+    public void onkoPisteetSuuremmatToimiiOikein() {
+        peli.setPisteet(200);
+        String s = "120 Uolevi";
+        assertTrue(peli.onkoPisteetSuuremmat(s));
+    }
+    
+    @Test
+    public void onkoPisteetSuuremmatToimiiOikein2() {
+        peli.setPisteet(121);
+        String s = "120 Uolevi";
+        assertTrue(peli.onkoPisteetSuuremmat(s));
+    }
+    
+    @Test
+    public void onkoPisteetSuuremmatToimiiOikein3() {
+        peli.setPisteet(120);
+        String s = "120 Uolevi";
+        assertFalse(peli.onkoPisteetSuuremmat(s));
+    }
+    
+    @Test
+    public void onkoPisteetSuuremmatToimiiOikein4() {
+        peli.setPisteet(10);
+        String s = "120 Uolevi";
+        assertFalse(peli.onkoPisteetSuuremmat(s));
+    }
+    
     @After
     public void tearDown() {
     }

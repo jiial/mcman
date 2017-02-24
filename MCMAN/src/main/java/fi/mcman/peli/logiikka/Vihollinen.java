@@ -287,6 +287,7 @@ public class Vihollinen extends Hahmo {
         } else {
             arvoSuunta();
         }
+        System.out.println(suunta);
     }
 
     /**

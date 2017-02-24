@@ -76,13 +76,13 @@ public class NappaimistonKuuntelija implements KeyListener {
                 pelaaja.liiku();
             }
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-//                int tekstinPituus = peli.getKl().getAlusta().getNimikentta().getText().length();
-//                if (tekstinPituus > 0 && tekstinPituus < 13) {
-//                    pelaaja.setNimi(peli.getKl().getAlusta().getNimikentta().getText());
-                peli.aloita();
-//                } else {
-//                    peli.getKl().getAlusta();
-//                }
+                int tekstinPituus = peli.getKl().getAlusta().getNimikentta().getText().length();
+                if (tekstinPituus > 0 && tekstinPituus < 13) {
+                    pelaaja.setNimi(peli.getKl().getAlusta().getNimikentta().getText());
+                    peli.aloita();
+                } else if (tekstinPituus == 0) {
+                    peli.aloita();
+                }
             }
         }
     }

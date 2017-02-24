@@ -5,7 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -72,6 +74,10 @@ public class Peli extends Timer implements ActionListener {
      * Lukee Highscoreja.
      */
     private Scanner lukija;
+    /**
+     * Sisältää highscoret.
+     */
+    private ArrayList<HighscoreTulos> hs;
 
     /**
      * Luo uuden pelin ja samalla siihen uuden tason, pelialustan, pelaajan,
@@ -88,15 +94,17 @@ public class Peli extends Timer implements ActionListener {
         this.pisteet = 0;
         this.nalka = 0;
         aloitettu = false;
+        this.hs = new ArrayList<>();
 
         addActionListener(this);
         luoViholliset();
         luoBurgerit();
 
         try {
-            File t = new File("src/main/resources/Highscores.txt");
-            kirjoittaja = new FileWriter(t, true);
-            lukija = new Scanner(t);
+            InputStream is = getClass().getClassLoader().getResourceAsStream("Highscores.txt");
+            File f = new File("Highscores.txt");
+            kirjoittaja = new FileWriter(f, true);
+            lukija = new Scanner(is);
         } catch (Exception e) {
             System.out.println("Highscoreja ei löydy.");
         }
@@ -311,13 +319,16 @@ public class Peli extends Timer implements ActionListener {
             for (Vihollinen v : this.viholliset) {
                 v.liiku();
             }
-
             if (jatkuu()) {
                 this.paivitettava.paivita();
             }
         }
     }
 
+    public void setPisteet(int pisteet) {
+        this.pisteet = pisteet;
+    }
+    
     /**
      * Päivittää pelin tuloksen Highscores-tiedostoon.
      */
@@ -325,14 +336,11 @@ public class Peli extends Timer implements ActionListener {
         if (!lukija.hasNextLine()) {
             kirjoitaTiedostoon();
         } else {
-            while (lukija.hasNextLine()) {
-                String rivi = lukija.nextLine();
-                if (rivi != null) {
-                    System.out.println(rivi);
-                    if (onkoPisteetSuuremmat(rivi)) {
-                        kirjoitaTiedostoon();
-                        break;
-                    }
+            ArrayList<HighscoreTulos> lista = annaHighscoret();
+            for (HighscoreTulos t : lista) {
+                if (pisteet > t.getPisteet()) {
+                    kirjoitaTiedostoon();
+                    break;
                 }
             }
         }
@@ -348,37 +356,17 @@ public class Peli extends Timer implements ActionListener {
      *
      * @return palauttaa viisi parasta tulosta ArrayListina.
      */
-    public ArrayList<String> annaHighscoret() {
-        int i = 0;
-        String[] taulukko = new String[1000];
+    public ArrayList<HighscoreTulos> annaHighscoret() {
         while (lukija.hasNextLine()) {
             String s = lukija.nextLine();
-            taulukko[i] = s;
-            i++;
+            hs.add(new HighscoreTulos(s));
         }
-        ArrayList<String> palautettava = new ArrayList<>();
-        ArrayList<Integer> lista = new ArrayList<>();
-        String nimi = "";
-        for (int j = 0; j < 5; j++) {
-            int suurin = 0;
-            for (int k = 0; k < taulukko.length; k++) {
-                if (taulukko[k] == null) {
-                    continue;
-                }
-                System.out.println(taulukko[k]);
-                int arvo = Integer.parseInt(taulukko[k].substring(0, 3));
-                System.out.println(arvo);
-                if (arvo > suurin) {
-                    if (!lista.contains(k)) {
-                        lista.add(k);
-                        suurin = arvo;
-                        nimi = taulukko[k].substring(4);
-                    }
-                }
-            }
-            palautettava.add(suurin + " " + nimi);
+        Collections.sort(hs);
+        ArrayList<HighscoreTulos> a = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            a.add(hs.get(i));
         }
-        return palautettava;
+        return a;
     }
 
     /**

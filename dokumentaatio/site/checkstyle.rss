@@ -25,8 +25,8 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2017</copyright>
     <item>
-      <title>File: 14,
-             Errors: 6,
+      <title>File: 15,
+             Errors: 14,
              Warnings: 0,
              Infos: 0
       </title>
@@ -47,6 +47,20 @@ under the License.
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#fi.mcman.peli.logiikka.Paivitettava.java">fi/mcman/peli/logiikka/Paivitettava.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#fi.mcman.peli.logiikka.HighscoreTulos.java">fi/mcman/peli/logiikka/HighscoreTulos.java</a>
                 </td>
                 <td>
                   0
@@ -83,7 +97,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  0
+                  1
                 </td>
               </tr>
                           <tr>
@@ -209,7 +223,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  0
+                  3
                 </td>
               </tr>
                           <tr>
@@ -223,7 +237,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  1
+                  5
                 </td>
               </tr>
                           <tr>

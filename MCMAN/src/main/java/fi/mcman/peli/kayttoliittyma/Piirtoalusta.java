@@ -1,6 +1,7 @@
 package fi.mcman.peli.kayttoliittyma;
 
 import fi.mcman.peli.logiikka.Burgeri;
+import fi.mcman.peli.logiikka.HighscoreTulos;
 import fi.mcman.peli.logiikka.Paivitettava;
 import fi.mcman.peli.logiikka.Pelaaja;
 import fi.mcman.peli.logiikka.Peli;
@@ -242,16 +243,20 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Font f = new Font("Arial", Font.PLAIN, 50);
+        Font f = new Font("Arial", Font.BOLD, 30);
         g.setFont(f);
-//        g.drawString("Anna nimesi:", 90, 150);
-        g.drawString("Paina ENTER", 90, 480);
-        g.drawString("aloittaaksesi pelin", 20, 530);
-        nimikentta.setBounds(90, 200, 320, 60);
-        nimikentta.setBackground(Color.BLACK);
+        g.setColor(Color.white);
+        g.drawString("Anna nimesi:", 140, 450);
+        g.setFont(new Font("Arial", Font.ROMAN_BASELINE, 18));
+        g.drawString("Nimimerkin tulee olla 0-12 merkkiä pitkä", 60, 470);
+        g.setFont(f);
+        g.drawString("Paina ENTER", 140, 530);
+        g.drawString("aloittaaksesi pelin", 90, 555);
+        nimikentta.setBounds(140, 475, 220, 30);
+        nimikentta.setBackground(Color.getHSBColor(9, 58, 76));
         nimikentta.setFont(f);
-//        nimikentta.addKeyListener(peli.getKl().getK());
-//        add(nimikentta);
+        nimikentta.addKeyListener(peli.getKl().getK());
+        add(nimikentta);
     }
 
     /**
@@ -260,16 +265,16 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
      * @param g -
      */
     public void tulostaHighscoret(Graphics g) {
-        ArrayList<String> t = peli.annaHighscoret();
+        ArrayList<HighscoreTulos> t = peli.annaHighscoret();
         Font f = new Font("Arial", Font.PLAIN, 28);
         g.setFont(f);
         g.setColor(Color.WHITE);
-        int x = 170;
+        int x = 150;
         int y = 120;
-        for (String s : t) {
-            if (s != null) {
-                System.out.println(s);
-                g.drawString(s, x, y);
+        for (int i = 0; i < 5; i++) {
+            if (t.get(i) != null) {
+                System.out.println(t.get(i));
+                g.drawString((i + 1) + ". " + t.get(i).getSisalto(), x, y);
             }
             y += 50;
         }
@@ -277,12 +282,5 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
 
     public JTextField getNimikentta() {
         return this.nimikentta;
-    }
-
-    /**
-     * Ilmoittaa jos annettu nimi ei kelpaa.
-     */
-    public void nimiEiKelpaa() {
-
     }
 }
