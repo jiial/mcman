@@ -213,10 +213,10 @@ public class PeliTest {
 //        assertEquals(200, peli.annaHighscoret().get(0).getPisteet());
 //    }
 
-    @Test
-    public void peliAntaaHighscoretOikein() {
-        assertEquals(5, peli.annaHighscoret().size());
-    }
+//    @Test
+//    public void peliAntaaHighscoretOikein() {
+//        assertEquals(5, peli.annaHighscoret().size());
+//    }
     
 //    @Test
 //    public void onkoPisteetSuuremmatToimiiOikein() {

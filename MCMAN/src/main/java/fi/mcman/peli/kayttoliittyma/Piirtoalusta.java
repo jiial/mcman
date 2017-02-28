@@ -39,10 +39,6 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
      */
     private List<Vihollinen> viholliset;
     /**
-     * JLabel jossa näkyy pisteet.
-     */
-    private JLabel pisteet;
-    /**
      * JTextField johon syötetään nimi ennen pelin alkua.
      */
     private JTextField nimikentta;
@@ -56,10 +52,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         this.peli = peli;
         this.pelaaja = peli.getPelaaja();
         this.viholliset = peli.getViholliset();
-        this.pisteet = new JLabel();
         this.nimikentta = new JTextField();
-        pisteet.setForeground(Color.WHITE);
-        add(pisteet);
         super.setBackground(Color.BLACK);
     }
 
@@ -74,7 +67,6 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (!peli.jatkuu()) {
-            pisteet.setVisible(false);
             tulostaHighscoret(g);
         } else {
             if (peli.onAloitettu()) {
@@ -91,7 +83,8 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
                 piirraViholliset(g);
                 piirraBurgerit(g);
                 piirraNalkapalkki(g);
-
+                g.setFont(new Font("Arial", Font.PLAIN, 18));
+                g.drawString("Pisteet: " + peli.getPisteet(), 205, 16);
                 if (!peli.jatkuu()) {
                     if (peli.voittiko()) {
                         ilmoitusKunVoittaa(g);
@@ -112,9 +105,8 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
      * @see paintComponent(Graphics g)
      */
     @Override
-    public void paivita() {
+    public void paivita() {;
         repaint();
-        pisteet.setText("Pisteet: " + peli.getPisteet());
     }
 
     /**
@@ -271,12 +263,14 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         g.setColor(Color.WHITE);
         int x = 150;
         int y = 120;
-        for (int i = 0; i < 5; i++) {
-            if (t.get(i) != null) {
-                System.out.println(t.get(i));
-                g.drawString((i + 1) + ". " + t.get(i).getSisalto(), x, y);
+        if (!t.isEmpty()) {
+            for (int i = 0; i < 5; i++) {
+                if (t.size() >= i + 1) {
+                    System.out.println(t.get(i).getPisteet());
+                    g.drawString((i + 1) + ". " + t.get(i).getSisalto(), x, y);
+                }
+                y += 50;
             }
-            y += 50;
         }
     }
 

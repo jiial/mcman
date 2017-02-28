@@ -102,7 +102,7 @@ public class Peli extends Timer implements ActionListener {
 
         try {
             InputStream is = getClass().getClassLoader().getResourceAsStream("Highscores.txt");
-            File f = new File("Highscores.txt");
+            File f = new File("src/main/resources/Highscores.txt");
             kirjoittaja = new FileWriter(f, true);
             lukija = new Scanner(is);
         } catch (Exception e) {
@@ -328,7 +328,7 @@ public class Peli extends Timer implements ActionListener {
     public void setPisteet(int pisteet) {
         this.pisteet = pisteet;
     }
-    
+
     /**
      * Päivittää pelin tuloksen Highscores-tiedostoon.
      */
@@ -337,10 +337,16 @@ public class Peli extends Timer implements ActionListener {
             kirjoitaTiedostoon();
         } else {
             ArrayList<HighscoreTulos> lista = annaHighscoret();
-            for (HighscoreTulos t : lista) {
-                if (pisteet > t.getPisteet()) {
-                    kirjoitaTiedostoon();
-                    break;
+            if (lista.size() < 5) {
+                kirjoitaTiedostoon();
+                lisaaNykyinenTulos();
+            } else {
+                for (HighscoreTulos t : lista) {
+                    if (pisteet > t.getPisteet()) {
+                        kirjoitaTiedostoon();
+                        lisaaNykyinenTulos();
+                        break;
+                    }
                 }
             }
         }
@@ -352,6 +358,19 @@ public class Peli extends Timer implements ActionListener {
     }
 
     /**
+     * Päivittää uusimman tuloksen listalle.
+     */
+    public void lisaaNykyinenTulos() {
+        if (pisteet >= 100) {
+            hs.add(new HighscoreTulos(pisteet + " " + pelaaja.getNimi() + "\n"));
+        } else if (pisteet >= 10) {
+            hs.add(new HighscoreTulos("0" + pisteet + " " + pelaaja.getNimi() + "\n"));
+        } else {
+            hs.add(new HighscoreTulos("00" + pisteet + " " + pelaaja.getNimi() + "\n"));
+        }
+    }
+
+    /**
      * Hakee viisi parhainta tulosta Highscoreista.
      *
      * @return palauttaa viisi parasta tulosta ArrayListina.
@@ -359,33 +378,25 @@ public class Peli extends Timer implements ActionListener {
     public ArrayList<HighscoreTulos> annaHighscoret() {
         while (lukija.hasNextLine()) {
             String s = lukija.nextLine();
-            hs.add(new HighscoreTulos(s));
+            if (!s.isEmpty()) {
+                hs.add(new HighscoreTulos(s));
+            }
         }
         Collections.sort(hs);
         ArrayList<HighscoreTulos> a = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            a.add(hs.get(i));
+            if (hs.size() >= i + 1) {
+                a.add(hs.get(i));
+            }
         }
         return a;
-    }
-
-    /**
-     * Katsoo onko pisteet suuremmat kuin luetulla rivillä.
-     *
-     * @param rivi Lukijan lukema rivi Highscoreista
-     * @return palauttaa true jos on, false jos ei
-     */
-    public boolean onkoPisteetSuuremmat(String rivi) {
-        if (Integer.parseInt(rivi.substring(0, 3)) < pisteet) {
-            return true;
-        }
-        return false;
     }
 
     /**
      * Kirjoittaa uuden Highscore-tuloksen tiedostoon.
      */
     public void kirjoitaTiedostoon() {
+        System.out.println("joira");
         try {
             if (pisteet >= 100) {
                 kirjoittaja.write(pisteet + " " + pelaaja.getNimi() + "\n");
