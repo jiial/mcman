@@ -41,6 +41,91 @@ public class VihollinenTest {
         vihu.setArpoja(arpoja);
 
     }
+    
+    @Test
+    public void suunnanValitseminenToimii() {
+        vihu.siirra(340, 380);
+        kohde.siirra(300, 380);
+        vihu.valitseSuuntaJosPelaajaLahettyvilla();
+        assertEquals(Suunta.VASEN, vihu.getSuunta());
+    }
+    
+    @Test
+    public void suunnanValitseminenToimii2() {
+        vihu.siirra(340, 360);
+        kohde.siirra(340, 380);
+        vihu.valitseSuuntaJosPelaajaLahettyvilla();
+        assertEquals(Suunta.ALAS, vihu.getSuunta());
+    }
+    
+    @Test
+    public void suuntaValitaanKivasti() {
+        vihu.setSuunta(Suunta.ALAS);
+        vihu.setSuunnanMuutos(10);
+        vihu.siirra(460, 440);
+        vihu.valitseSuunta();
+        assertEquals(Suunta.ALAS, vihu.getSuunta());
+    }
+    
+    @Test
+    public void suuntaValitaanKivasti2() {
+        vihu.setSuunta(Suunta.YLOS);
+        vihu.setSuunnanMuutos(10);
+        vihu.siirra(460, 440);
+        vihu.valitseSuunta();
+        assertEquals(Suunta.YLOS, vihu.getSuunta());
+    }
+    
+    @Test
+    public void suuntaValitaanKivasti3() {
+        vihu.setSuunta(Suunta.ALAS);
+        vihu.setSuunnanMuutos(10);
+        vihu.siirra(460, 440);
+        kohde.siirra(20, 20);
+        vihu.liiku();
+        assertEquals(Suunta.ALAS, vihu.getSuunta());
+    }
+    
+    @Test
+    public void suunnanMuutosPalautuuOikein() {
+        vihu.setSuunnanMuutos(100);
+        vihu.liiku();
+        assertEquals(99, vihu.getSuunnanMuutos());
+    }
+    
+    @Test
+    public void suuntaValitaanOikeinJosPelaajaLahella() {
+        vihu.siirra(140, 180);
+        kohde.siirra(140, 140);
+        vihu.liiku();
+        assertEquals(Suunta.OIKEA, vihu.getSuunta());
+    }
+    
+    @Test
+    public void valitseeSuunnanOikein() {
+        vihu.setSuunnanMuutos(100);
+        vihu.setSuunta(Suunta.OIKEA);
+        vihu.siirra(20, 20);
+        vihu.liiku();
+        assertEquals(Suunta.ALAS, vihu.getSuunta());
+    }
+    
+    @Test
+    public void valitseeSuunnanOikein2() {
+        vihu.setSuunnanMuutos(100);
+        vihu.setSuunta(Suunta.OIKEA);
+        vihu.siirra(40, 20);
+        vihu.liiku();
+        assertEquals(Suunta.OIKEA, vihu.getSuunta());
+    }
+    
+    @Test
+    public void valitseeSuunnanOikein3() {
+        vihu.siirra(60, 80);
+        kohde.siirra(20, 80);
+        vihu.valitseSuuntaJosPelaajaTahtaimessa();
+        assertEquals(Suunta.YLOS, vihu.getSuunta());
+    }
 
     @Test
     public void palauttaaXoikein() {

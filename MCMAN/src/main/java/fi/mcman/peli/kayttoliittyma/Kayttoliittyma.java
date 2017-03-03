@@ -31,7 +31,7 @@ public class Kayttoliittyma implements Runnable {
     /**
      * Kuuntelee näppäimistöä.
      */
-    private NappaimistonKuuntelija k;
+    private NappaimistonKuuntelija kuuntelija;
     
     /**
      * Luo uuden Kayttoliittyman.
@@ -71,8 +71,8 @@ public class Kayttoliittyma implements Runnable {
         this.alusta = new Piirtoalusta(peli);
         this.peli.setPaivitettava(alusta);
         container.add(alusta);
-        this.k = new NappaimistonKuuntelija(this);
-        frame.addKeyListener(k);
+        this.kuuntelija = new NappaimistonKuuntelija(this);
+        frame.addKeyListener(kuuntelija);
         frame.setFocusable(true);
     }
 
@@ -80,8 +80,8 @@ public class Kayttoliittyma implements Runnable {
         return frame;
     }
 
-    public NappaimistonKuuntelija getK() {
-        return k;
+    public NappaimistonKuuntelija getKuuntelija() {
+        return kuuntelija;
     }
     
     public Piirtoalusta getAlusta() {

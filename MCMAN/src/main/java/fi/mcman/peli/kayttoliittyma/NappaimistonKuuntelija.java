@@ -40,7 +40,6 @@ public class NappaimistonKuuntelija implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-
     }
 
     /**
@@ -89,7 +88,9 @@ public class NappaimistonKuuntelija implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-
     }
 
+    public void setPelaaja(Pelaaja pelaaja) {
+        this.pelaaja = pelaaja;
+    }
 }

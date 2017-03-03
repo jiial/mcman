@@ -8,7 +8,7 @@
       2. Pisteiden kerääminen
   * Nimen syöttäminen
   * Mahdollinen aloitusvalikko
-  * Mahdollisesti vaikeusasteen valitseminen/highscorejen katselu
+  * Highscorejen katselu
   * Pelin aloittaminen esimerkiksi Enterillä
   * Pelin sulkeminen oikeasta yläkulmasta
 

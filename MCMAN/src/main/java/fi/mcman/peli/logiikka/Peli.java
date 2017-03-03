@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.InputStream;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -69,7 +69,7 @@ public class Peli extends Timer implements ActionListener {
     /**
      * Kirjoittaa Highscoret ylös Highscores.txt-tekstitiedostoon.
      */
-    private FileWriter kirjoittaja;
+    private Writer kirjoittaja;
     /**
      * Lukee Highscoreja.
      */
@@ -101,10 +101,9 @@ public class Peli extends Timer implements ActionListener {
         luoBurgerit();
 
         try {
-            InputStream is = getClass().getClassLoader().getResourceAsStream("Highscores.txt");
-            File f = new File("src/main/resources/Highscores.txt");
+            File f = new File("Highscores.txt");
             kirjoittaja = new FileWriter(f, true);
-            lukija = new Scanner(is);
+            lukija = new Scanner(f);
         } catch (Exception e) {
             System.out.println("Highscoreja ei löydy.");
         }
@@ -135,6 +134,10 @@ public class Peli extends Timer implements ActionListener {
         return taso;
     }
 
+    public void setKirjoittaja(Writer kirjoittaja) {
+        this.kirjoittaja = kirjoittaja;
+    }
+
     public void aloita() {
         aloitettu = true;
     }
@@ -145,6 +148,10 @@ public class Peli extends Timer implements ActionListener {
 
     public boolean onAloitettu() {
         return aloitettu;
+    }
+
+    public Writer getKirjoittaja() {
+        return kirjoittaja;
     }
 
     public List<Burgeri> getBurgerit() {
@@ -339,17 +346,16 @@ public class Peli extends Timer implements ActionListener {
             ArrayList<HighscoreTulos> lista = annaHighscoret();
             if (lista.size() < 5) {
                 kirjoitaTiedostoon();
-                lisaaNykyinenTulos();
             } else {
                 for (HighscoreTulos t : lista) {
                     if (pisteet > t.getPisteet()) {
                         kirjoitaTiedostoon();
-                        lisaaNykyinenTulos();
                         break;
                     }
                 }
             }
         }
+        lisaaNykyinenTulos();
         try {
             kirjoittaja.close();
         } catch (Exception e) {
@@ -368,6 +374,14 @@ public class Peli extends Timer implements ActionListener {
         } else {
             hs.add(new HighscoreTulos("00" + pisteet + " " + pelaaja.getNimi() + "\n"));
         }
+    }
+
+    public void setLukija(Scanner lukija) {
+        this.lukija = lukija;
+    }
+
+    public ArrayList<HighscoreTulos> getHs() {
+        return hs;
     }
 
     /**
@@ -396,7 +410,6 @@ public class Peli extends Timer implements ActionListener {
      * Kirjoittaa uuden Highscore-tuloksen tiedostoon.
      */
     public void kirjoitaTiedostoon() {
-        System.out.println("joira");
         try {
             if (pisteet >= 100) {
                 kirjoittaja.write(pisteet + " " + pelaaja.getNimi() + "\n");

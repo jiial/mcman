@@ -36,6 +36,11 @@ public class TasoTest {
     public void setUp() {
         taso = new Taso();
     }
+    
+    @Test
+    public void nullJosTiiltaEiOle() {
+        assertNull(taso.palautaTiili(700, 700));
+    }
 
     @Test
     public void tasonTiiltenArvotOikein() {

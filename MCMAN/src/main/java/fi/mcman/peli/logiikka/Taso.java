@@ -11,6 +11,9 @@ package fi.mcman.peli.logiikka;
  */
 public final class Taso {
 
+    /**
+     * Muuttujaan säilötään tason tiilet.
+     */
     private Tiili[][] tiilet;
 
     /**

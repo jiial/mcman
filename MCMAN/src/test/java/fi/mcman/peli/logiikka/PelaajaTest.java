@@ -36,6 +36,18 @@ public class PelaajaTest {
         pelaaja = peli.getPelaaja();
 
     }
+    
+    @Test
+    public void setNimiToimii() {
+        pelaaja.setNimi(null);
+        assertEquals("McMan", pelaaja.getNimi());
+    }
+    
+    @Test
+    public void setNimiToimii2() {
+        pelaaja.setNimi("Pena");
+        assertEquals("Pena", pelaaja.getNimi());
+    }
 
     @Test
     public void onElossaAluksi() {

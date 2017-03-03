@@ -36,6 +36,12 @@ public class HighscoreTulosTest {
     }
     
     @Test
+    public void sisaltoAsetetaanJaPalautetaanOikein() {
+        h.setSisalto("testi");
+        assertEquals("testi", h.getSisalto());
+    }
+    
+    @Test
     public void pisteetMuunnetaanOikein() {
         assertEquals(10, h.getPisteet());
     }

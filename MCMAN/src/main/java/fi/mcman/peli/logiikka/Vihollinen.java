@@ -12,7 +12,7 @@ import java.util.Random;
  * @see arvoSuunta()
  */
 public class Vihollinen extends Hahmo {
-    
+
     /**
      * Asettavat rajat vihollisen liikkumiselle.
      */
@@ -92,7 +92,7 @@ public class Vihollinen extends Hahmo {
     public int getSuunnanMuutos() {
         return suunnanMuutos;
     }
-    
+
     public String getNimi() {
         return nimi;
     }
@@ -123,6 +123,8 @@ public class Vihollinen extends Hahmo {
             if (this.x > this.pieninX) {
                 if (voiLiikkua()) {
                     this.x--;
+                } else {
+                    voiMuuttaaAlasTaiYlos();
                 }
             }
         }
@@ -130,6 +132,8 @@ public class Vihollinen extends Hahmo {
             if (this.x < this.suurinX) {
                 if (voiLiikkua()) {
                     this.x++;
+                } else {
+                    voiMuuttaaAlasTaiYlos();
                 }
             }
         }
@@ -137,6 +141,8 @@ public class Vihollinen extends Hahmo {
             if (this.y < this.suurinY) {
                 if (voiLiikkua()) {
                     this.y++;
+                } else {
+                    voiMuuttaaVasemmalleTaiOikealle();
                 }
             }
         }
@@ -144,6 +150,8 @@ public class Vihollinen extends Hahmo {
             if (this.y > this.pieninY) {
                 if (voiLiikkua()) {
                     this.y--;
+                } else {
+                    voiMuuttaaVasemmalleTaiOikealle();
                 }
             }
         }
@@ -158,7 +166,6 @@ public class Vihollinen extends Hahmo {
      * @see valitseSuuntaJosPelaajaLahettyvilla()
      */
     public void valitseSuunta() {
-
         if (kohde.getX() == this.x || kohde.getY() == this.y) {
             if (suunnanMuutos > 0) {
                 suunnanMuutos--;
@@ -193,7 +200,6 @@ public class Vihollinen extends Hahmo {
                         suunnanMuutos--;
                         return;
                     }
-
                 } else {
                     valitseSuuntaJosPelaajaLahettyvilla();
                 }
@@ -241,7 +247,7 @@ public class Vihollinen extends Hahmo {
      */
     public void valitseSuuntaJosPelaajaTahtaimessa() {
         if (kohde.getX() == this.x) {
-            if (kohde.getY() - this.y <= 100 && kohde.getY() - this.y > 0) {
+            if (kohde.getY() - this.y <= 200 && kohde.getY() - this.y > 0) {
                 this.suunta = Suunta.ALAS;
                 if (voiLiikkua() == false) {
                     this.suunta = suunta.OIKEA;
@@ -250,7 +256,7 @@ public class Vihollinen extends Hahmo {
                     }
                     suunnanMuutos = 160;
                 }
-            } else if (kohde.getY() - this.y < 0 && kohde.getY() - this.y >= -100) {
+            } else if (kohde.getY() - this.y < 0 && kohde.getY() - this.y >= -200) {
                 this.suunta = Suunta.YLOS;
                 if (voiLiikkua() == false) {
                     this.suunta = suunta.VASEN;
@@ -263,7 +269,7 @@ public class Vihollinen extends Hahmo {
                 arvoSuunta();
             }
         } else if (kohde.getY() == this.y) {
-            if (kohde.getX() - this.x <= 100 && kohde.getX() - this.x >= 0) {
+            if (kohde.getX() - this.x <= 200 && kohde.getX() - this.x >= 0) {
                 this.suunta = Suunta.OIKEA;
                 if (voiLiikkua() == false) {
                     this.suunta = suunta.ALAS;
@@ -272,9 +278,9 @@ public class Vihollinen extends Hahmo {
                     }
                     suunnanMuutos = 160;
                 }
-            } else if (kohde.getX() - this.x < 0 && kohde.getX() - this.x >= -100) {
+            } else if (kohde.getX() - this.x < 0 && kohde.getX() - this.x >= -200) {
                 this.suunta = Suunta.VASEN;
-                if (voiLiikkua() == false) {
+                if (!voiLiikkua()) {
                     this.suunta = suunta.YLOS;
                     if (!voiLiikkua()) {
                         suunta = suunta.ALAS;
@@ -287,7 +293,6 @@ public class Vihollinen extends Hahmo {
         } else {
             arvoSuunta();
         }
-        System.out.println(suunta);
     }
 
     /**
@@ -392,5 +397,4 @@ public class Vihollinen extends Hahmo {
         }
         return false;
     }
-
 }

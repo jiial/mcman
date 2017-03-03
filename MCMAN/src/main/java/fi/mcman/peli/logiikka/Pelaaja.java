@@ -13,9 +13,9 @@ public class Pelaaja extends Hahmo {
      * Kertoo onko pelaaja elossa.
      */
     private boolean elossa;
+
     /**
-     * Pelaajalla on Taso, joka määrää, voiko pelaaja liikkua tiettyyn
-     * suuntaan.
+     * Pelaajalla on Taso, joka määrää, voiko pelaaja liikkua tiettyyn suuntaan.
      */
     private Taso taso;
 
@@ -97,9 +97,11 @@ public class Pelaaja extends Hahmo {
      * @return true jos osuu, false jos ei.
      */
     public boolean osuuViholliseen(Vihollinen v) {
-        if (this.x == v.getX() && this.y == v.getY()) {
-            kuolee();
-            return true;
+        if (x - v.getX() <= 1 && x - v.getX() >= -1) {
+            if (y - v.getY() <= 1 && y - v.getY() >= -1) {
+                kuolee();
+                return true;
+            }
         }
         return false;
     }
@@ -113,20 +115,17 @@ public class Pelaaja extends Hahmo {
             if (voiLiikkuaVasemmalle(x, y)) {
                 this.x -= 2;
             }
-
         }
         if (this.suunta == suunta.OIKEA) {
             if (voiLiikkuaOikealle(x, y)) {
                 this.x += 2;
             }
         }
-
         if (this.suunta == suunta.ALAS) {
             if (voiLiikkuaAlas(x, y)) {
                 this.y += 2;
             }
         }
-
         if (this.suunta == suunta.YLOS) {
             if (voiLiikkuaYlos(x, y)) {
                 this.y -= 2;
@@ -202,5 +201,4 @@ public class Pelaaja extends Hahmo {
         }
         return false;
     }
-
 }

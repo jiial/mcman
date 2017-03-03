@@ -23,4 +23,8 @@ Päivä | Tunnit | Kuvaus
 22.02.2017 | 5.0h | Aloitusnäyttö, Highscorejen kanssa tappelua...
 23.02.2017 | 6.0h | Highscorejen ja aloitusvalikon kanssa taistelua, ihmekikkailua ja säätöä, Javadocia
 24.02.2017 | 4.5h | Highscoret, nimen syöttäminen, testejä, dokumentaatiota
+28.02.2017 | 2.0h | Highscoret, testejä, koodin siistimistä
+01.03.2017 | 4.0h | Kuvia, Highscorejen kanssa tappelemista, laajennusyrityksiä
+02.03.2017 | 2.0h | Kuvia, Highscorejen kanssa tappelemista, testejä
+03.03.2017 | 6.0h | Testejä, turhien metodien/muuttujien karsimista, käyttöliittymän hiomista
 ... | ... | ...
