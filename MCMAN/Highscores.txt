@@ -12,3 +12,6 @@
 083 kissamies
 000 McMan
 056 dasd
+086 McMan
+000 McMan
+144 McMan

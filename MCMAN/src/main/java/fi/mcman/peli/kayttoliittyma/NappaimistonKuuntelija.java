@@ -10,7 +10,7 @@ import java.awt.event.KeyListener;
  * Luokkaa tarvitaan pelaajan liikuttamiseen.
  *
  * @author ljone
- * @see logiikka.Pelaaja#liiku()
+ * @see Pelaaja#liiku()
  */
 public class NappaimistonKuuntelija implements KeyListener {
 

@@ -124,7 +124,7 @@ public class VihollinenTest {
         vihu.siirra(60, 80);
         kohde.siirra(20, 80);
         vihu.valitseSuuntaJosPelaajaTahtaimessa();
-        assertEquals(Suunta.YLOS, vihu.getSuunta());
+        assertEquals(Suunta.ALAS, vihu.getSuunta());
     }
 
     @Test

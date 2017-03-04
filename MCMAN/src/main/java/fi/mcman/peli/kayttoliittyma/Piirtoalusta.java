@@ -59,8 +59,10 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
      * Piirtää pelin komponentit hyödyntäen eri komponenttien piirtämismetodeja.
      *
      * @param g -
-     * @see piirraPelaaja(Graphics g), piirraViholliset(Graphics g),
-     * piirraBurgerit(Graphics g), piirraNalkapalkki(Graphics g)
+     * @see #piirraPelaaja(Graphics g)
+     * @see #piirraViholliset(Graphics g)
+     * @see #piirraBurgerit(Graphics g)
+     * @see #piirraNalkapalkki(Graphics g)
      */
     @Override
     public void paintComponent(Graphics g) {
@@ -103,7 +105,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
      * Piirtää pelin komponentit uudelleen sekä päivittää JLabel:in sisällön
      * (pisteet).
      *
-     * @see paintComponent(Graphics g)
+     * @see #paintComponent(Graphics g)
      */
     @Override
     public void paivita() {
@@ -193,7 +195,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         g.setColor(Color.WHITE);
         int alkuX = 30;
         int alkuY = 530;
-        g.drawRect(alkuX - 2, alkuY - 2, 380, 19);
+        g.drawRect(alkuX - 2, alkuY - 2, 383, 19);
         if (peli.getNalka() < 500) {
             g.setColor(Color.GREEN);
         } else if (peli.getNalka() < 1000) {
@@ -228,8 +230,8 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
             g.drawString("Heikko tulos", 150, 400);
             g.drawString("(Tilaus: Lasten ateria)", 80, 450);
         } else if (peli.getPisteet() < 80) {
-            g.drawString("Kohtalainen tulos", 130, 400);
-            g.drawString("(Tilaus: Juustoateria)", 80, 450);
+            g.drawString("Kohtalainen tulos", 120, 400);
+            g.drawString("(Tilaus: Juustoateria)", 90, 450);
         } else if (peli.getPisteet() < 100) {
             g.drawString("Hyvä tulos", 160, 400);
             g.drawString("(Tilaus: Tuplajuustoateria)", 70, 450);

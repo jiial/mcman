@@ -38,10 +38,6 @@ public class Peli extends Timer implements ActionListener {
      */
     private Pelialusta alusta;
     /**
-     * Kertoo voittiko pelaaja pelin eli keräsikö kaikki pisteet.
-     */
-    private boolean voittiko;
-    /**
      * Peli päivittää Paivitettavaa 18 millisekunnin välein.
      */
     private Paivitettava paivitettava;
@@ -90,7 +86,6 @@ public class Peli extends Timer implements ActionListener {
         this.pelaaja = new Pelaaja(this);
         this.viholliset = new ArrayList<>();
         this.burgerit = new ArrayList<>();
-        this.voittiko = false;
         this.pisteet = 0;
         this.nalka = 0;
         aloitettu = false;
@@ -138,12 +133,11 @@ public class Peli extends Timer implements ActionListener {
         this.kirjoittaja = kirjoittaja;
     }
 
+    /**
+     * Asettaa muuttujan aloitettu arvoksi true ja aloittaa varsinaisen pelin.
+     */
     public void aloita() {
         aloitettu = true;
-    }
-
-    public boolean voittiko() {
-        return voittiko;
     }
 
     public boolean onAloitettu() {
@@ -180,8 +174,8 @@ public class Peli extends Timer implements ActionListener {
      * ole kasvanut liian suureksi.
      *
      * @see Pelaaja#onElossa()
-     * @see onBurgereita()
-     * @see this.nalka
+     * @see #onBurgereita()
+     * @see #nalka
      * @return Jos edellä olevat ehdot menevät läpi peli jatkuu eli palautetaan
      * true. Jos ensimmäinen ehto menee läpi mutta seuraava ei, asetetaan
      * muuttujan voittiko arvoksi true ja palautetaan false. Peli ei siis jatku
@@ -195,7 +189,6 @@ public class Peli extends Timer implements ActionListener {
                     return true;
                 }
             } else {
-                voittiko = true;
                 return false;
             }
         }
@@ -282,9 +275,8 @@ public class Peli extends Timer implements ActionListener {
      * @param e parametri saadaan perittyjen luokkien Timer ja ActionListener
      * avulla
      * @see Vihollinen#liiku()
-     * @see jatkuu()
+     * @see #jatkuu()
      * @see Paivitettava
-     * @see Piirtoalusta#paivita()
      * @see Pelaaja#kuolee()
      */
     @Override
@@ -312,11 +304,11 @@ public class Peli extends Timer implements ActionListener {
                         b.setSyoty(true);
                         pisteet++;
                         nalka -= 60;
-                        if (nalka < 0) {
-                            nalka = 0;
-                        }
                     }
                 }
+            }
+            if (nalka < 0) {
+                nalka = 0;
             }
             for (Vihollinen v : viholliset) {
                 if (pelaaja.osuuViholliseen(v)) {

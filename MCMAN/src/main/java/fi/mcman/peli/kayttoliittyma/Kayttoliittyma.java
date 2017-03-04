@@ -46,7 +46,7 @@ public class Kayttoliittyma implements Runnable {
      * Luo JFramen ja liittää siihen tarvittavat komponentit metodilla
      * luoKomponentit.
      *
-     * @see luoKomponentit(Container container)
+     * @see #luoKomponentit(Container container)
      */
     @Override
     public void run() {

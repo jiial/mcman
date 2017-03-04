@@ -7,9 +7,9 @@ import java.util.Random;
  * tekoäly jonka mukaan vihollinen liikkuu. Perii abstraktin luokan Hahmo
  *
  * @author ljone
- * @see liiku()
- * @see valitseSuunta()
- * @see arvoSuunta()
+ * @see #liiku()
+ * @see #valitseSuunta()
+ * @see #arvoSuunta()
  */
 public class Vihollinen extends Hahmo {
 
@@ -114,7 +114,7 @@ public class Vihollinen extends Hahmo {
      * lähellä pelaajaa. Sitten liikkuu valittuun suuntaan jos mahdollista.
      *
      * @see Suunta
-     * @see valitseSuunta()
+     * @see #valitseSuunta()
      */
     @Override
     public void liiku() {
@@ -161,9 +161,9 @@ public class Vihollinen extends Hahmo {
      * Valitsee suunnan johon vihollinen liikkuu. Hyödyntää useita muita
      * metodeja päätöksenteossa.
      *
-     * @see arvoSuunta()
-     * @see valitseSuuntaJosPelaajaTahtaimessa()
-     * @see valitseSuuntaJosPelaajaLahettyvilla()
+     * @see #arvoSuunta()
+     * @see #valitseSuuntaJosPelaajaTahtaimessa()
+     * @see #valitseSuuntaJosPelaajaLahettyvilla()
      */
     public void valitseSuunta() {
         if (kohde.getX() == this.x || kohde.getY() == this.y) {
@@ -211,7 +211,7 @@ public class Vihollinen extends Hahmo {
      * Vihollisen suunta valitaan tämän metodin mukaan jos pelaaja on lähellä
      * vihollista muttei kuitenkaan samassa x- tai y-koordinaatissa.
      *
-     * @see arvoSuunta()
+     * @see #arvoSuunta()
      */
     public void valitseSuuntaJosPelaajaLahettyvilla() {
         if (kohde.getX() - this.x <= 180 && kohde.getX() - this.x > 0) {
@@ -243,26 +243,20 @@ public class Vihollinen extends Hahmo {
      * Vihollisen suunta valitaan tämän metodin perusteella jos vihollisen ja
      * pelaajan x- tai y-koordinaatti on sama.
      *
-     * @see arvoSuunta()
+     * @see #arvoSuunta()
      */
     public void valitseSuuntaJosPelaajaTahtaimessa() {
         if (kohde.getX() == this.x) {
             if (kohde.getY() - this.y <= 200 && kohde.getY() - this.y > 0) {
                 this.suunta = Suunta.ALAS;
                 if (voiLiikkua() == false) {
-                    this.suunta = suunta.OIKEA;
-                    if (!voiLiikkua()) {
-                        suunta = suunta.VASEN;
-                    }
+                    voiMuuttaaVasemmalleTaiOikealle();
                     suunnanMuutos = 160;
                 }
             } else if (kohde.getY() - this.y < 0 && kohde.getY() - this.y >= -200) {
                 this.suunta = Suunta.YLOS;
                 if (voiLiikkua() == false) {
-                    this.suunta = suunta.VASEN;
-                    if (!voiLiikkua()) {
-                        suunta = suunta.OIKEA;
-                    }
+                    voiMuuttaaVasemmalleTaiOikealle();
                     suunnanMuutos = 160;
                 }
             } else {
@@ -272,19 +266,13 @@ public class Vihollinen extends Hahmo {
             if (kohde.getX() - this.x <= 200 && kohde.getX() - this.x >= 0) {
                 this.suunta = Suunta.OIKEA;
                 if (voiLiikkua() == false) {
-                    this.suunta = suunta.ALAS;
-                    if (!voiLiikkua()) {
-                        suunta = suunta.YLOS;
-                    }
+                    voiMuuttaaAlasTaiYlos();
                     suunnanMuutos = 160;
                 }
             } else if (kohde.getX() - this.x < 0 && kohde.getX() - this.x >= -200) {
                 this.suunta = Suunta.VASEN;
                 if (!voiLiikkua()) {
-                    this.suunta = suunta.YLOS;
-                    if (!voiLiikkua()) {
-                        suunta = suunta.ALAS;
-                    }
+                    voiMuuttaaAlasTaiYlos();
                     suunnanMuutos = 160;
                 }
             } else {
@@ -364,7 +352,7 @@ public class Vihollinen extends Hahmo {
      * epäsäännöllisemmin pitkin pelialuetta. Hyödyntää metodia voiLiikkua().
      *
      * @return true jos voi, false jos ei
-     * @see voiLiikkua()
+     * @see #voiLiikkua()
      */
     public boolean voiMuuttaaAlasTaiYlos() {
         suunta = suunta.ALAS;
@@ -384,7 +372,7 @@ public class Vihollinen extends Hahmo {
      * epäsäännöllisemmin pitkin pelialuetta. Hyödyntää metodia voiLiikkua().
      *
      * @return true jos voi, false jos ei
-     * @see voiLiikkua()
+     * @see #voiLiikkua()
      */
     public boolean voiMuuttaaVasemmalleTaiOikealle() {
         suunta = suunta.OIKEA;

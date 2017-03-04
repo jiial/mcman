@@ -40,20 +40,6 @@ public class PeliTest {
     }
 
     @Test
-    public void voittikoToimii() {
-        assertFalse(peli.voittiko());
-    }
-
-    @Test
-    public void voittikoToimii2() {
-        for (Burgeri b : peli.getBurgerit()) {
-            b.setSyoty(true);
-        }
-        peli.jatkuu();
-        assertTrue(peli.voittiko());
-    }
-
-    @Test
     public void onAloitettuToimii() {
         assertFalse(peli.onAloitettu());
     }

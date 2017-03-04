@@ -51,7 +51,7 @@ public final class Taso {
     /**
      * Luo uuden tason käyttäen metodia luoTaso().
      *
-     * @see luoTaso()
+     * @see #luoTaso()
      */
     public Taso() {
         luoTaso();
