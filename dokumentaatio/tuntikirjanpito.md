@@ -27,4 +27,4 @@ Päivä | Tunnit | Kuvaus
 01.03.2017 | 4.0h | Kuvia, Highscorejen kanssa tappelemista, laajennusyrityksiä
 02.03.2017 | 2.0h | Kuvia, Highscorejen kanssa tappelemista, testejä
 03.03.2017 | 6.0h | Testejä, turhien metodien/muuttujien karsimista, käyttöliittymän hiomista
-... | ... | ...
+04.03.2017 | 2.0h | Javadoc, Checkstyle ja muuta viimeistelyä
