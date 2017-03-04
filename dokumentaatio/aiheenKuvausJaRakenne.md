@@ -6,8 +6,7 @@
   * Pelin pelaaminen
       1. Hahmon liikuttaminen nuolinäppäimillä
       2. Pisteiden kerääminen
-  * Nimen syöttäminen
-  * Mahdollinen aloitusvalikko
+  * Aloitusvalikko/nimen syöttäminen
   * Highscorejen katselu
   * Pelin aloittaminen esimerkiksi Enterillä
   * Pelin sulkeminen oikeasta yläkulmasta
