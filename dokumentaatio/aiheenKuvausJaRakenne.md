@@ -1,4 +1,4 @@
-**Aihe:** Jonkinnäköinen versio klassisesta Pacman-pelistä. Inspiraatio McDonaldsista mutta teema saattaa vaihtua vielä lennosta. Tarkoituksena keksiä jokin oma twisti peliin, mutta tämä on vielä kehitteillä. Peli saattaa erota logiikaltaan jonkin verran alkuperäisestä Pacmanista.
+**Aihe:** Jonkinnäköinen versio klassisesta Pacman-pelistä. Inspiraatio McDonaldsista. Tarkoituksena kerätä burgereita ja pitää huoli siitä, ettei nälkä kasva liian suureksi. Peli eroaa siis logiikaltaan jonkin verran alkuperäisestä Pacmanista.
 
 **Käyttäjät:** Kuka tahansa, pääosin koululaiset/opiskelijat. Vain yksi käyttötapaus (pelin pelaaminen).
 
